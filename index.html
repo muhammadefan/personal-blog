@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Let's Talk</title>
+    <title>Hi, I'm Efan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== CONFIGURATION ===== */
         :root {
-            --background-opacity: 0.5; /* Adjust this value from 0 to 1 (0 = fully transparent, 1 = fully opaque) */
+            --background-opacity: 0.35; /* Adjust this value from 0 to 1 (0 = fully transparent, 1 = fully opaque) */
             --chatbox-opacity: 0.95; /* Adjust chat container background opacity (0 to 1) */
             --chatbox-width: 50%; /* Adjust chat container width (e.g., 800px, 1200px, 90%) */
+            --blog-background-opacity: 90%; /* Opacity for blog section background */
+            --blog-overlap: 50px; /* How much the blog section overlaps the first section */
+            --blog-border-radius: 70px; /* Border radius for the blog section background */
         }
         /* ========================= */
 
@@ -26,9 +30,9 @@
         }
 
         /* Background with adjustable opacity */
-        body::before {
+        .first-section::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -39,6 +43,12 @@
             background-attachment: fixed;
             opacity: var(--background-opacity);
             z-index: -1;
+        }
+
+        .first-section {
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 50px;
         }
 
         /* Navigation Bar */
@@ -68,11 +78,13 @@
         .menu-btn {
             background: none;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: 500;
             color: #333;
             cursor: pointer;
             padding: 8px 16px;
             transition: background 0.3s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .menu-btn:hover {
@@ -89,19 +101,22 @@
         .dropdown-btn {
             background: none;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: 500;
             color: #333;
             cursor: pointer;
-            padding: 8px 16px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: background 0.3s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            border-radius: 6px;
         }
 
         .dropdown-btn:hover {
             background: rgba(0, 0, 0, 0.05);
-            border-radius: 5px;
+            /* border-radius: 5px; */
         }
 
         .dropdown-content {
@@ -123,9 +138,11 @@
             padding: 12px 16px;
             text-align: left;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #333;
             transition: background 0.3s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            border-bottom: 1px solid #f5f5f5;
         }
 
         .dropdown-content button:hover {
@@ -136,10 +153,57 @@
             display: block;
         }
 
+        .dropdown-arrow {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            margin-left: 5px;
+            vertical-align: middle;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid #333; /* Arrow color */
+            transition: transform 0.2s;
+        }
+
+        .dropdown-btn:hover .dropdown-arrow {
+            border-top-color: #666; /* Darker on hover */
+        }
+
+        /* Rotate arrow when dropdown is active */
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Title container to group title and subtitle */
+        .title-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Keep existing .section-title style */
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto 0px; /* Add space between title and subtitle */
+            color: #000;
+        }
+
+        /* New subtitle style */
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 500px;
+            margin: -40px auto 20px;  /* top, right, bottom, left OR top-bottom, right-left */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         /* Main Content */
         .main-content {
             max-width: var(--chatbox-width);
-            margin: 150px auto 50px;
+            margin: 140px auto 50px;
             padding: 0 20px;
         }
 
@@ -161,6 +225,7 @@
             height: 350px;
             display: flex;
             flex-direction: column;
+            margin-bottom: 250px;
         }
 
         /* Input Form */
@@ -186,11 +251,11 @@
         }
 
         .send-btn {
-            padding: 15px 40px;
+            padding: 15px 25px;
             background: #000;
             color: white;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
@@ -385,57 +450,429 @@
             background-color: #f5f5f5;
             font-weight: 600;
         }
+
+
+        /* ========== BLOG SECTION ========== */
+        .blog-section {
+            position: relative;
+            min-height: 100vh;
+            padding: 80px 0;
+            margin-top: calc(-1 * var(--blog-overlap)); /* Overlap with first section */
+            z-index: 1;
+            /* box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);  */
+            /* Subtle shadow for depth */
+        }
+
+        .blog-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/blue-acrylic-decorative-texture-with.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: var(--blog-background-opacity);
+            border-radius: var(--blog-border-radius) var(--blog-border-radius) 0 0; /* Rounded top corners */
+            z-index: -1;
+        }
+
+        .blog-container {
+            /* max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-section {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            padding-left: 10px;
+            border-left: 5px solid #000;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 2px solid #333;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-summary {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: #666;
+        }
+
+        .read-more::after {
+            content: ' →';
+        }
+
+        /* Modal for blog post */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 10px;
+            padding: 40px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #666;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .modal-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="navbar-title">Hi, I'm Efan</div>
-        <div class="navbar-menu">
-            <button class="menu-btn" onclick="navigateToPage('menu-a')">Menu-A</button>
-            <button class="menu-btn" onclick="navigateToPage('menu-b')">Menu-B</button>
-            <div class="dropdown">
-                <button class="dropdown-btn">
-                    Menu-C ▼
-                </button>
-                <div class="dropdown-content">
-                    <button onclick="navigateToPage('menu-c-1')">Option 1</button>
-                    <button onclick="navigateToPage('menu-c-2')">Option 2</button>
-                    <button onclick="navigateToPage('menu-c-3')">Option 3</button>
+    <!-- First Section: Navigation Bar and Chatbot -->
+    <div class="first-section">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="navbar-title">Hi, I'm Efan</div>
+            <div class="navbar-menu">
+                <button class="menu-btn" onclick="navigateToPage('menu-a')">Menu-A</button>
+                <button class="menu-btn" onclick="navigateToPage('menu-b')">Menu-B</button>
+                <button class="menu-btn" onclick="navigateToPage('menu-c')">Menu-C</button>
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        Menu-D <span class="dropdown-arrow"></span>
+                    </button>
+                    <div class="dropdown-content">
+                        <button onclick="navigateToPage('menu-c-1')">Option 1</button>
+                        <button onclick="navigateToPage('menu-c-2')">Option 2</button>
+                        <button onclick="navigateToPage('menu-c-3')">Option 3</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="title-container">
+                <h1 class="section-title">Let's Talk!</h1>
+                <p class="section-subtitle">Ask me anything and I'll help you find answers</p>
+            </div>
+            
+            <!-- Chat Container -->
+            <div class="chat-container" id="chatContainer">
+                <!-- Input Form -->
+                <div class="input-form">
+                    <input type="text" class="input-field" placeholder="write your question here..." id="questionInput">
+                    <!-- <button class="send-btn" onclick="sendQuestion()" id="sendBtn">Send</button> -->
+                    <button class="send-btn" onclick="sendQuestion()" id="sendBtn" title="Send">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+
+                <!-- Loading indicator -->
+                <div class="loading" id="loading">🤔 Thinking...</div>
+
+                <!-- Chat History -->
+                <div class="chat-history" id="chatHistory">
+                    <!-- Chat messages will be added here dynamically -->
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1 class="section-title">Let's Talk!</h1>
-        
-        <!-- Chat Container -->
-        <div class="chat-container" id="chatContainer">
-            <!-- Input Form -->
-            <div class="input-form">
-                <input type="text" class="input-field" placeholder="write your question here..." id="questionInput">
-                <button class="send-btn" onclick="sendQuestion()" id="sendBtn">Send</button>
+    <!-- Second Section: Blog Posts -->
+    <div class="blog-section">
+        <div class="blog-container">
+            <!-- Category A -->
+            <div class="category-section">
+                <h2 class="category-title">Category-A</h2>
+                <div class="blog-grid" id="categoryA"></div>
             </div>
 
-            <!-- Loading indicator -->
-            <div class="loading" id="loading">🤔 Thinking...</div>
-
-            <!-- Chat History -->
-            <div class="chat-history" id="chatHistory">
-                <!-- Chat messages will be added here dynamically -->
+            <!-- Category B -->
+            <div class="category-section">
+                <h2 class="category-title">Category-B</h2>
+                <div class="blog-grid" id="categoryB"></div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal for Blog Post -->
+    <div class="modal" id="blogModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h1 class="modal-title" id="modalTitle"></h1>
+            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
 
     <script>
         // ===== CONFIGURATION: PASTE YOUR GEMINI API KEY HERE =====
         // Get your free API key from: https://aistudio.google.com/app/apikey
-        const GEMINI_API_KEY = 'AIzaSyBMX0s4P8r_EJ6bQXivGGXNQ-cHoVbtlHQ';  // Replace this with your actual API key
+        const GEMINI_API_KEY = 'AIzaSyBMX0s4P8r_EJ6bQXivGGXNQ-cHoVbtlHQ';
         // =========================================================
+
+        
+        // Blog posts metadata
+        // Store your blog posts in 'blog-posts/' folder with .txt files
+        const blogPosts = [
+            {
+                id: 1,
+                category: 'A',
+                title: 'First Blog Post in Category A',
+                summary: 'This is a summary of the first blog post in category A',
+                image: 'assets/yellow-marble-texture-background.jpg', // Optional: path to image
+                file: 'blog-posts/post1.txt',
+                date: '2024-01-15'
+            },
+            {
+                id: 2,
+                category: 'A',
+                title: 'Second Blog Post in Category A',
+                summary: 'This is a summary of the second blog post in category A',
+                image: '', // Leave empty if no image
+                file: 'blog-posts/post2.txt',
+                date: '2024-01-10'
+            },
+            {
+                id: 3,
+                category: 'A',
+                title: 'Third Blog Post in Category A',
+                summary: 'This is a summary of the third blog post in category A',
+                image: '',
+                file: 'blog-posts/post3.txt',
+                date: '2024-01-05'
+            },
+            {
+                id: 4,
+                category: 'A',
+                title: 'Fourth Blog Post in Category A',
+                summary: 'This is a summary of the fourth blog post in category A',
+                image: '',
+                file: 'blog-posts/post4.txt',
+                date: '2024-01-01'
+            },
+            {
+                id: 5,
+                category: 'B',
+                title: 'First Blog Post in Category B',
+                summary: 'This is a summary of the first blog post in category B',
+                image: '',
+                file: 'blog-posts/post5.txt',
+                date: '2024-01-20'
+            },
+            {
+                id: 6,
+                category: 'B',
+                title: 'Second Blog Post in Category B',
+                summary: 'This is a summary of the second blog post in category B',
+                image: '',
+                file: 'blog-posts/post6.txt',
+                date: '2024-01-18'
+            },
+            {
+                id: 7,
+                category: 'B',
+                title: 'Third Blog Post in Category B',
+                summary: 'This is a summary of the third blog post in category B',
+                image: '',
+                file: 'blog-posts/post7.txt',
+                date: '2024-01-12'
+            },
+            {
+                id: 8,
+                category: 'B',
+                title: 'Fourth Blog Post in Category B',
+                summary: 'This is a summary of the fourth blog post in category B',
+                image: '',
+                file: 'blog-posts/post8.txt',
+                date: '2024-01-08'
+            }
+        ];
+
+        // Load blog posts on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadBlogPosts();
+        });
+
+        function loadBlogPosts() {
+            // Get 4 most recent posts for each category
+            const categoryAPosts = blogPosts
+                .filter(post => post.category === 'A')
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 4);
+            
+            const categoryBPosts = blogPosts
+                .filter(post => post.category === 'B')
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 4);
+
+            renderBlogCards('categoryA', categoryAPosts);
+            renderBlogCards('categoryB', categoryBPosts);
+        }
+
+        function renderBlogCards(containerId, posts) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                card.onclick = () => openBlogPost(post);
+
+                const imageSection = post.image 
+                    ? `<div class="blog-image"><img src="${post.image}" alt="${post.title}"></div>`
+                    : `<div class="blog-image">image</div>`;
+
+                card.innerHTML = `
+                    ${imageSection}
+                    <div class="blog-content">
+                        <p class="blog-summary">${post.summary}</p>
+                        <a href="#" class="read-more" onclick="event.preventDefault(); openBlogPost(${JSON.stringify(post).replace(/"/g, '&quot;')})">read more</a>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        async function openBlogPost(post) {
+            const modal = document.getElementById('blogModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            modalTitle.textContent = post.title;
+            modalBody.innerHTML = '<p>Loading...</p>';
+            modal.classList.add('active');
+
+            try {
+                const response = await fetch(post.file);
+                if (!response.ok) {
+                    throw new Error('Could not load blog post');
+                }
+                const content = await response.text();
+                modalBody.innerHTML = `<p>${content.replace(/\n/g, '<br>')}</p>`;
+            } catch (error) {
+                modalBody.innerHTML = `<p style="color: #d32f2f;">Error loading blog post. Make sure the file exists at: ${post.file}</p>
+                <p style="margin-top: 20px; color: #666;">To create blog posts, create a folder called "blog-posts" and add .txt files with your content.</p>`;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('blogModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('blogModal').addEventListener('click', (e) => {
+            if (e.target.id === 'blogModal') {
+                closeModal();
+            }
+        });
 
         // Navigation function (placeholder)
         function navigateToPage(page) {
