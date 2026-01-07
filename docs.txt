@@ -7,3 +7,28 @@ url: https://www.freepik.com/free-photo/blue-acrylic-decorative-texture-with-cop
 3. yellow background (yellow-marble-texture-background.jpg)
 url: https://www.freepik.com/free-photo/detailed-structure-marble-natural-pattern-background-design_19076153.htm#fromView=search&page=1&position=35&uuid=ecdf415b-7c9c-418b-9d2b-30be1a3598e2&query=yellow+textured+Background
 
+        // Add environment indicator badge
+        window.addEventListener('load', () => {
+            const badge = document.createElement('div');
+            badge.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: ${CONFIG.isLocal ? '#2196F3' : '#4CAF50'};
+                color: white;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-size: 13px;
+                font-weight: bold;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                font-family: 'Segoe UI', sans-serif;
+            `;
+            
+            const mode = CONFIG.isLocal && typeof LOCAL_CONFIG !== 'undefined' 
+                ? '🔧 Local Development' 
+                : '🚀 Production';
+            
+            badge.textContent = mode;
+            document.body.appendChild(badge);
+        });

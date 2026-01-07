@@ -11,7 +11,7 @@
             --background-opacity: 0.35; /* Adjust this value from 0 to 1 (0 = fully transparent, 1 = fully opaque) */
             --chatbox-opacity: 0.95; /* Adjust chat container background opacity (0 to 1) */
             --chatbox-width: 50%; /* Adjust chat container width (e.g., 800px, 1200px, 90%) */
-            --blog-background-opacity: 90%; /* Opacity for blog section background */
+            --blog-background-opacity: 70%; /* Opacity for blog section background */
             --blog-overlap: 50px; /* How much the blog section overlaps the first section */
             --blog-border-radius: 70px; /* Border radius for the blog section background */
         }
@@ -178,6 +178,10 @@
         .title-container {
             text-align: center;
             margin-bottom: 10px;
+            width: 100%; /* Take full width of parent */
+            max-width: 800px; /* Match main-content width */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Keep existing .section-title style */
@@ -205,6 +209,9 @@
             max-width: var(--chatbox-width);
             margin: 140px auto 50px;
             padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center children horizontally */
         }
 
         .section-title {
@@ -222,17 +229,27 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            height: 350px;
+            /* height: 350px; */
             display: flex;
             flex-direction: column;
-            margin-bottom: 250px;
+            margin-bottom: 50px;
+
+            /* Width constraints */
+            max-width: 600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            
+            /* Height constraints */
+            /* min-height: 200px; */
+            /* max-height: 500px; */
         }
 
         /* Input Form */
         .input-form {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 0px;
             flex-shrink: 0;
         }
 
@@ -291,6 +308,8 @@
             overflow-y: auto;
             padding-right: 10px;
             min-height: 0;
+            /* Limit the scrollable area */
+            max-height: 300px; /* Adjust this based on your max-height preference */
         }
 
         .chat-history::-webkit-scrollbar {
@@ -324,6 +343,7 @@
             font-size: 0.75rem;
             font-weight: 600;
             color: #000;
+            margin-top: 8px;
             margin-bottom: 8px;
             text-align: left;
         }
@@ -480,9 +500,6 @@
         }
 
         .blog-container {
-            /* max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px; */
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -501,6 +518,13 @@
             margin-bottom: 30px;
             padding-left: 10px;
             border-left: 5px solid #000;
+            cursor: pointer;
+            transition: color 0.3s, padding-left 0.3s;
+        }
+
+        .category-title:hover {
+            color: #666;
+            padding-left: 20px;
         }
 
         .blog-grid {
@@ -629,6 +653,545 @@
             line-height: 1.8;
             color: #333;
         }
+
+
+        /* Category List View */
+        .category-list-view {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-list-view.active {
+            display: block;
+        }
+
+        .category-header {
+            margin-bottom: 40px;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: #666;
+        }
+
+        .back-button::before {
+            content: '←';
+            font-size: 1.2rem;
+        }
+
+        .category-list-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .category-list-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .post-list-item {
+            padding: 30px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .post-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-list-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .post-list-date {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .post-list-content {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .post-list-read-more {
+            display: inline-block;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .post-list-read-more:hover {
+            color: #666;
+        }
+
+        .post-list-read-more::after {
+            content: '...';
+        }
+
+        /* ========== SOCIAL MEDIA SECTION ========== */
+        /* Alternative: Simple social icons */
+        .social-section {
+            text-align: center;
+            margin: 60px auto 40px;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .social-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .social-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .social-icons-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .social-icon-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+        }
+
+        .social-icon-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #333;
+            border-radius: 15px; /* Bigger rectangle border radius */
+            transition: all 0.3s ease;
+        }
+
+        .social-icon {
+            position: relative;
+            z-index: 2;
+            width: 40px; /* Icon size inside */
+            height: 40px; /* Icon size inside */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 28px; /* Font Awesome icon size */
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons-container.simple {
+            gap: 30px;
+        }
+
+        .social-icon-simple {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #333;
+            color: #333;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon-simple:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: #000;
+            border-color: #000;
+        }
+
+        /* Different hover colors for each platform */
+        .social-icon-simple[data-platform="github"]:hover {
+            background: #333;
+            color: white;
+        }
+
+        .social-icon-simple[data-platform="linkedin"]:hover {
+            background: #0077b5;
+            color: white;
+        }
+
+        /* .social-icon-simple[data-platform="twitter"]:hover {
+            background: #1da1f2;
+            color: white;
+        } */
+
+        .social-icon-simple[data-platform="instagram"]:hover {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            color: white;
+        }
+
+        /* ========== MOBILE RESPONSIVE DESIGN ========== */
+
+        /* For tablets and smaller desktops (max-width: 1024px) */
+        @media (max-width: 1024px) {
+            .main-content {
+                max-width: 90%;
+            }
+            
+            .chat-container {
+                max-width: 90%;
+            }
+            
+            .blog-container {
+                max-width: 95%;
+                padding: 0 15px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        /* For tablets (max-width: 768px) */
+        @media (max-width: 768px) {
+            /* Navigation Bar */
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .navbar-title {
+                position: static;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            .navbar-menu {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .menu-btn, .dropdown-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            /* Main Title */
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+                margin: -30px auto 15px;
+                max-width: 90%;
+            }
+            
+            /* Chat Container */
+            .chat-container {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .input-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .input-field {
+                width: 100%;
+                min-height: 45px;
+            }
+            
+            .send-btn {
+                width: 100%;
+                padding: 12px;
+                min-height: 45px;
+            }
+            
+            .chat-history {
+                max-height: 250px;
+            }
+            
+            /* Blog Section */
+            .category-title {
+                font-size: 1.7rem;
+                margin-bottom: 20px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .blog-image {
+                height: 150px;
+            }
+            
+            .blog-content {
+                padding: 15px;
+            }
+            
+            /* Social Media */
+            .social-title {
+                font-size: 1.7rem;
+            }
+            
+            .social-icons-container {
+                gap: 20px;
+            }
+            
+            .social-icon-simple {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            /* Modal */
+            .modal-content {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .modal-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* For mobile phones (max-width: 480px) */
+        @media (max-width: 480px) {
+            /* Navigation Bar */
+            .navbar-menu {
+                gap: 10px;
+            }
+            
+            .menu-btn, .dropdown-btn {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+            
+            .dropdown-content {
+                min-width: 140px;
+            }
+            
+            /* Main Title */
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+            
+            .section-subtitle {
+                font-size: 0.9rem;
+                margin: -25px auto 10px;
+            }
+            
+            .title-container {
+                margin-bottom: 20px;
+            }
+            
+            /* Chat Container */
+            .main-content {
+                margin: 100px auto 30px;
+                padding: 0 15px;
+            }
+            
+            .chat-container {
+                padding: 15px;
+                border-radius: 8px;
+            }
+            
+            .chat-box {
+                padding: 10px;
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+            
+            .chat-label {
+                font-size: 0.7rem;
+            }
+            
+            .chat-history {
+                max-height: 200px;
+            }
+            
+            /* Blog Section */
+            .blog-section {
+                padding: 40px 0;
+                margin-top: -30px;
+            }
+            
+            .blog-container {
+                padding: 0 10px;
+            }
+            
+            .category-section {
+                margin-bottom: 40px;
+            }
+            
+            .category-title {
+                font-size: 1.5rem;
+                padding-left: 8px;
+                border-left-width: 4px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+                gap: 15px;
+            }
+            
+            .blog-image {
+                height: 140px;
+                font-size: 0.9rem;
+            }
+            
+            .blog-summary {
+                font-size: 0.9rem;
+                min-height: 50px;
+            }
+            
+            .read-more {
+                font-size: 0.85rem;
+            }
+            
+            /* Social Media */
+            .social-section {
+                margin: 40px auto 30px;
+                padding: 0 15px;
+            }
+            
+            .social-title {
+                font-size: 1.5rem;
+            }
+            
+            .social-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+            
+            .social-icons-container {
+                gap: 15px;
+            }
+            
+            .social-icon-simple {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            /* Category List View */
+            .category-list-view {
+                padding: 20px 10px;
+            }
+            
+            .category-list-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-list-item {
+                padding: 20px 0;
+            }
+            
+            .post-list-title {
+                font-size: 1.5rem;
+            }
+            
+            .post-list-content {
+                font-size: 0.95rem;
+            }
+            
+            /* Modal */
+            .modal-content {
+                padding: 25px 15px;
+            }
+            
+            .modal-title {
+                font-size: 1.7rem;
+                margin-bottom: 15px;
+            }
+            
+            .modal-body {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .modal-close {
+                font-size: 1.5rem;
+                top: 10px;
+                right: 15px;
+            }
+        }
+
+        /* For very small phones (max-width: 360px) */
+        @media (max-width: 360px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+            
+            .navbar-title {
+                font-size: 1.2rem;
+            }
+            
+            .menu-btn, .dropdown-btn {
+                font-size: 0.8rem;
+                padding: 5px 8px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .social-icons-container {
+                gap: 12px;
+            }
+            
+            .social-icon-simple {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -686,19 +1249,40 @@
     </div>
 
     <!-- Second Section: Blog Posts -->
+    <!-- MANUAL EDIT IF MORE ADDITIONS -->
     <div class="blog-section">
-        <div class="blog-container">
+        <!-- Main Blog Grid View -->
+        <div class="blog-container" id="blogMainView">
             <!-- Category A -->
             <div class="category-section">
-                <h2 class="category-title">Category-A</h2>
+                <h2 class="category-title" onclick="showCategoryList('A')">Category-A</h2>
                 <div class="blog-grid" id="categoryA"></div>
             </div>
 
             <!-- Category B -->
             <div class="category-section">
-                <h2 class="category-title">Category-B</h2>
+                <h2 class="category-title" onclick="showCategoryList('B')">Category-B</h2>
                 <div class="blog-grid" id="categoryB"></div>
             </div>
+        </div>
+
+        <!-- Social Media Section (NEW) -->
+        <div class="social-section">
+            <h2 class="social-title">Connect With Me</h2>
+            <p class="social-subtitle">Follow me on social media for updates and more</p>
+            <div class="social-icons-container" id="socialIcons">
+                <!-- Icons will be added dynamically by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Category List View -->
+        <div class="category-list-view" id="categoryListView">
+            <div class="category-header">
+                <button class="back-button" onclick="hideCategoryList()">Back to all categories</button>
+                <h1 class="category-list-title" id="categoryListTitle"></h1>
+                <p class="category-list-subtitle" id="categoryListSubtitle"></p>
+            </div>
+            <div id="postListContainer"></div>
         </div>
     </div>
 
@@ -716,13 +1300,14 @@
     <script>        
         // Blog posts metadata
         // Store your blog posts in 'blog-posts/' folder with .txt files
+        // MANUAL EDIT IF MORE ADDITIONS
         const blogPosts = [
             {
                 id: 1,
                 category: 'A',
                 title: 'First Blog Post in Category A',
                 summary: 'This is a summary of the first blog post in category A',
-                image: 'assets/yellow-marble-texture-background.jpg', // Optional: path to image
+                image: 'assets/yellow-marble-texture-background.jpg',
                 file: 'blog-posts/post1.txt',
                 date: '2024-01-15'
             },
@@ -791,11 +1376,77 @@
             }
         ];
 
-        // Load blog posts on page load
+        // // Load blog posts on page load
+        // window.addEventListener('DOMContentLoaded', () => {
+        //     loadBlogPosts();
+        // });
+
+        // Social media data
+        const socialMedia = [
+            {
+                platform: 'github',
+                icon: 'fab fa-github',
+                url: 'https://github.com/muhammadefan',
+                name: 'GitHub'
+            },
+            {
+                platform: 'linkedin',
+                icon: 'fab fa-linkedin',
+                url: 'https://linkedin.com/in/muhammadefan',
+                name: 'LinkedIn'
+            },
+            // {
+            //     platform: 'twitter',
+            //     icon: 'fab fa-twitter',
+            //     url: 'https://twitter.com/yourusername',
+            //     name: 'Twitter'
+            // },
+            {
+                platform: 'instagram',
+                icon: 'fab fa-instagram',
+                url: 'https://instagram.com/efanmefanaf',
+                name: 'Instagram'
+            },
+            // {
+            //     platform: 'youtube',
+            //     icon: 'fab fa-youtube',
+            //     url: 'https://youtube.com/yourchannel',
+            //     name: 'YouTube'
+            // }
+        ];
+
+        // Function to render social media icons
+        function renderSocialMediaIcons() {
+            const container = document.getElementById('socialIcons');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            container.className = 'social-icons-container simple';
+            
+            socialMedia.forEach(social => {
+                const iconLink = document.createElement('a');
+                iconLink.className = 'social-icon-simple';
+                iconLink.href = social.url;
+                iconLink.target = '_blank';
+                iconLink.rel = 'noopener noreferrer';
+                iconLink.title = social.name;
+                iconLink.setAttribute('data-platform', social.platform);
+                
+                const icon = document.createElement('i');
+                icon.className = social.icon;
+                
+                iconLink.appendChild(icon);
+                container.appendChild(iconLink);
+            });
+        }
+
+        // Call this function when the page loads
         window.addEventListener('DOMContentLoaded', () => {
             loadBlogPosts();
+            renderSocialMediaIcons(); // Add this line
         });
 
+        // MANUAL EDIT IF MORE ADDITIONS
         function loadBlogPosts() {
             // Get 4 most recent posts for each category
             const categoryAPosts = blogPosts
@@ -861,6 +1512,74 @@
 
         function closeModal() {
             document.getElementById('blogModal').classList.remove('active');
+        }
+
+        // Show category list view
+        function showCategoryList(category) {
+            const mainView = document.getElementById('blogMainView');
+            const listView = document.getElementById('categoryListView');
+            const title = document.getElementById('categoryListTitle');
+            const subtitle = document.getElementById('categoryListSubtitle');
+            const container = document.getElementById('postListContainer');
+
+            // Get all posts for this category, sorted by date (newest first)
+            const posts = blogPosts
+                .filter(post => post.category === category)
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Update title
+            title.textContent = `Category-${category}`;
+            subtitle.textContent = `${posts.length} post${posts.length !== 1 ? 's' : ''} in this category`;
+
+            // Render posts
+            container.innerHTML = '';
+            posts.forEach(post => {
+                const postItem = document.createElement('div');
+                postItem.className = 'post-list-item';
+
+                // Format date (YYYY-MM-DD format)
+                const formattedDate = post.date;
+
+                // Truncate summary if too long (use summary as preview)
+                const maxLength = 100;
+                let preview = post.summary;
+                if (preview.length > maxLength) {
+                    preview = preview.substring(0, maxLength) + '...';
+                }
+
+                postItem.innerHTML = `
+                    <h2 class="post-list-title">${post.title}</h2>
+                    <p class="post-list-date">Published at ${formattedDate}</p>
+                    <p class="post-list-content">${preview}</p>
+                    <a class="post-list-read-more" onclick="openBlogPostFromList(${JSON.stringify(post).replace(/"/g, '&quot;')})">read more</a>
+                `;
+
+                container.appendChild(postItem);
+            });
+
+            // Toggle views
+            mainView.style.display = 'none';
+            listView.classList.add('active');
+
+            // Scroll to top of blog section
+            document.querySelector('.blog-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Hide category list view
+        function hideCategoryList() {
+            const mainView = document.getElementById('blogMainView');
+            const listView = document.getElementById('categoryListView');
+
+            mainView.style.display = 'block';
+            listView.classList.remove('active');
+
+            // Scroll to top of blog section
+            document.querySelector('.blog-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Open blog post from list view
+        function openBlogPostFromList(post) {
+            openBlogPost(post);
         }
 
         // Close modal when clicking outside
@@ -1013,32 +1732,6 @@
                 sendQuestion();
             }
         });
-
-        // // Add environment indicator badge
-        // window.addEventListener('load', () => {
-        //     const badge = document.createElement('div');
-        //     badge.style.cssText = `
-        //         position: fixed;
-        //         bottom: 20px;
-        //         right: 20px;
-        //         background: ${CONFIG.isLocal ? '#2196F3' : '#4CAF50'};
-        //         color: white;
-        //         padding: 10px 20px;
-        //         border-radius: 25px;
-        //         font-size: 13px;
-        //         font-weight: bold;
-        //         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        //         z-index: 10000;
-        //         font-family: 'Segoe UI', sans-serif;
-        //     `;
-            
-        //     const mode = CONFIG.isLocal && typeof LOCAL_CONFIG !== 'undefined' 
-        //         ? '🔧 Local Development' 
-        //         : '🚀 Production';
-            
-        //     badge.textContent = mode;
-        //     document.body.appendChild(badge);
-        // });
     </script>
 </body>
 </html>
