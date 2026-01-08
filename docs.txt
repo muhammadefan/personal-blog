@@ -32,3 +32,26 @@ url: https://www.freepik.com/free-photo/detailed-structure-marble-natural-patter
             badge.textContent = mode;
             document.body.appendChild(badge);
         });
+
+
+        async function openBlogPost(post) {
+            const modal = document.getElementById('blogModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            modalTitle.textContent = post.title;
+            modalBody.innerHTML = '<p>Loading...</p>';
+            modal.classList.add('active');
+
+            try {
+                const response = await fetch(post.file);
+                if (!response.ok) {
+                    throw new Error('Could not load blog post');
+                }
+                const content = await response.text();
+                modalBody.innerHTML = `<p>${content.replace(/\n/g, '<br>')}</p>`;
+            } catch (error) {
+                modalBody.innerHTML = `<p style="color: #d32f2f;">Error loading blog post. Make sure the file exists at: ${post.file}</p>
+                <p style="margin-top: 20px; color: #666;">To create blog posts, create a folder called "blog-posts" and add .txt files with your content.</p>`;
+            }
+        }
