@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display,wght@1,700&display=swap">
     <style>
         /* ===== CONFIGURATION ===== */
         :root {
@@ -65,12 +65,83 @@
             position: relative;
         }
 
-        .navbar-title {
+        /* .navbar-title {
             position: absolute;
             left: 50px;
             font-size: 1.5rem;
             font-weight: bold;
             color: #333;
+        } */
+        .navbar-title {
+            position: absolute;
+            left: 50px;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .navbar-title:hover {
+            opacity: 0.8;
+        }
+
+        .navbar-title-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .navbar-subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+            white-space: nowrap;
+            height: 20px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            text-align: left;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Animation for text transition */
+        .navbar-subtitle span {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            animation: rotateWords 12s infinite;
+        }
+
+        .navbar-subtitle span:nth-child(1) { animation-delay: 0s; }
+        .navbar-subtitle span:nth-child(2) { animation-delay: 4s; }
+        .navbar-subtitle span:nth-child(3) { animation-delay: 8s; }
+
+        @keyframes rotateWords {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            3% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+            28% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+            31% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
         }
 
         .navbar-menu {
@@ -238,7 +309,7 @@
             /* height: 350px; */
             display: flex;
             flex-direction: column;
-            margin-bottom: 50px;
+            margin-bottom: 5%;  /* Vertical gap between chatbot box with second section */
 
             /* Width constraints */
             max-width: 600px;
@@ -352,6 +423,7 @@
             margin-top: 8px;
             margin-bottom: 8px;
             text-align: left;
+            margin-left: 2%;
         }
 
         .chat-box {
@@ -477,7 +549,6 @@
             font-weight: 600;
         }
 
-
         /* ========== BLOG SECTION ========== */
         .blog-section {
             position: relative;
@@ -552,24 +623,6 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
-
-        /* .blog-image {
-            width: 100%;
-            height: 180px;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: #666;
-            border-bottom: 2px solid #333;
-        }
-
-        .blog-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        } */
 
         .blog-image {
             width: 100%;
@@ -804,8 +857,8 @@
             border-bottom: 1px solid #eee;
         }
 
-        .project-modal-title {
-            font-size: 2.5rem;
+        .project-modal-title {  /* Project title inside modal */
+            font-size: 1.7rem;
             font-weight: bold;
             color: #000;
             margin-bottom: 10px;
@@ -824,8 +877,8 @@
             color: #333;
         }
 
-        .project-section-title {
-            font-size: 1.5rem;
+        .project-section-title {  /* Content in modal*/
+            font-size: 1rem;
             font-weight: 600;
             color: #000;
             margin-top: 30px;
@@ -839,6 +892,129 @@
 
         .project-section-content p {
             margin-bottom: 15px;
+        }
+
+        /* Project label */
+        .project-category-label {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .category-descriptive-label {
+            background-color: #ff9800; /* Orange */
+        }
+
+        .category-diagnostics-label {
+            background-color: #4caf50; /* Green */
+        }
+
+        .category-predictive-label {
+            background-color: #2196f3; /* Blue */
+        }
+
+        .category-prescriptive-label {
+            background-color: #9a7de9ea; /* Purple */
+        }
+
+        /* Filter by category */
+        .projects-section {
+            position: relative;
+            min-height: 100vh;
+            padding: 80px 0;
+            margin-top: -30px;
+            z-index: 2;
+        }
+
+        .projects-layout {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .portfolio-sidebar {
+            flex-shrink: 0;
+            width: 140px;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .category-filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .category-filter-btn {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .category-filter-btn.active {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-category-a {
+            background-color: #ff9800;
+        }
+
+        .filter-category-a:hover {
+            background-color: #f57c00;
+        }
+
+        .filter-category-b {
+            background-color: #4caf50;
+        }
+
+        .filter-category-b:hover {
+            background-color: #388e3c;
+        }
+
+        .filter-category-c {
+            background-color: #2196f3;
+        }
+
+        .filter-category-c:hover {
+            background-color: #1976d2;
+        }
+
+        .filter-category-d {
+            background-color: #9a7de9ea;
+        }
+
+        .filter-category-d:hover {
+            background-color: #5921f3ea;
+        }
+
+        .filter-all {
+            background-color: #9e9e9e;
+        }
+
+        .filter-all:hover {
+            background-color: #757575;
+        }
+
+        .projects-main-content {
+            flex: 1;
         }
 
         /* Modal for blog post */
@@ -1278,7 +1454,6 @@
         }
 
         /* ========== MOBILE RESPONSIVE DESIGN ========== */
-
         /* For tablets and smaller desktops (max-width: 1024px) */
         @media (max-width: 1024px) {
             .main-content {
@@ -1314,10 +1489,22 @@
                 gap: 15px;
             }
             
+            /* .navbar-title {
+                position: static;
+                text-align: center;
+                margin-bottom: 10px;
+            } */
             .navbar-title {
                 position: static;
                 text-align: center;
                 margin-bottom: 10px;
+                left: 0;
+            }
+
+            .navbar-subtitle {
+                text-align: center;
+                font-size: 0.8rem;
+                height: 16px;
             }
             
             .navbar-menu {
@@ -1479,6 +1666,15 @@
             /* Navigation Bar */
             .navbar-menu {
                 gap: 10px;
+            }
+
+            .navbar-title-text {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-subtitle {
+                font-size: 0.75rem;
+                height: 14px;
             }
             
             .menu-btn, .dropdown-btn {
@@ -1749,9 +1945,13 @@
     <div class="first-section">
         <!-- Navigation Bar -->
         <nav class="navbar">
-            <div class="navbar-title">Hi, I'm Efan</div>
+            <!-- <div class="navbar-title">Hi, I'm Efan</div> -->
+            <a href="#" class="navbar-title" onclick="scrollToTop(event)">
+                <div class="navbar-title-text">Hi, I'm Efan</div>
+                <div class="navbar-subtitle" id="navbarSubtitle">a Data Analyst</div>
+            </a>
             <div class="navbar-menu">
-                <button class="menu-btn" onclick="scrollToBlog()">Articles</button>
+                <button class="menu-btn" onclick="navigateToPage('article')">Articles</button>
                 <button class="menu-btn" onclick="navigateToPage('portfolio')">Portfolio</button>
                 <!-- <button class="menu-btn" onclick="navigateToPage('menu-c')">Menu-C</button> -->
                 <div class="dropdown">
@@ -1834,11 +2034,22 @@
         </div>
     </div>
 
-    <!-- Third Section: Projects -->
     <div class="projects-section">
-        <div class="projects-container">
-            <h2 class="projects-title">Portfolio Projects</h2>
-            <div id="projectsContainer"></div>
+        <div class="projects-layout">
+            <div class="portfolio-sidebar">
+                <!-- <h3 class="sidebar-title">Categories</h3> -->
+                <div class="category-filter-list">
+                    <button class="category-filter-btn filter-all active" onclick="filterPortfolio('all')">All Projects</button>
+                    <button class="category-filter-btn filter-category-a" onclick="filterPortfolio('Descriptive')">Descriptive</button>
+                    <button class="category-filter-btn filter-category-b" onclick="filterPortfolio('Diagnostics')">Diagnostics</button>
+                    <button class="category-filter-btn filter-category-c" onclick="filterPortfolio('Predictive')">Predictive</button>
+                    <!-- <button class="category-filter-btn filter-category-d" onclick="filterPortfolio('Prescriptive')">Prescriptive</button> -->
+                </div>
+            </div>
+            <div class="projects-main-content">
+                <h2 class="projects-title">Portfolio Projects</h2>
+                <div id="projectsContainer"></div>
+            </div>
         </div>
     </div>
 
@@ -1862,307 +2073,142 @@
 
     <script src="config.js"></script>
     <script src="config.local.js" onerror="console.log('⚠️ Local config not found - using production mode')"></script>
-    <script>        
-        // Blog posts metadata
-        // Store your blog posts in 'blog-posts/' folder with .txt files
-        // MANUAL EDIT IF MORE ADDITIONS
-        const blogPosts = [
-            {
-                id: 1,
-                category: 'A',
-                title: 'First Blog Post in Category A',
-                summary: 'This is a summary of the first blog post in category A This is a summary of the first blog post in category A This is a summary of the first blog post in category A This is a summary of the first blog post in category A',
-                image: 'assets/yellow-marble-texture-background.jpg',
-                file: 'blog-posts/post1.txt',
-                date: '2024-01-15',
-                readingTime: 5
-            },
-            {
-                id: 2,
-                category: 'A',
-                title: 'Second Blog Post in Category A',
-                summary: 'This is a summary of the second blog post in category A',
-                image: '', // Leave empty if no image
-                file: 'blog-posts/post2.txt',
-                date: '2024-01-10',
-                readingTime: 5
-            },
-            {
-                id: 3,
-                category: 'A',
-                title: 'Third Blog Post in Category A',
-                summary: 'This is a summary of the third blog post in category A',
-                image: '',
-                file: 'blog-posts/post3.txt',
-                date: '2024-01-05',
-                readingTime: 5
-            },
-            {
-                id: 4,
-                category: 'A',
-                title: 'Fourth Blog Post in Category A',
-                summary: 'This is a summary of the fourth blog post in category A',
-                image: '',
-                file: 'blog-posts/post4.txt',
-                date: '2024-01-01',
-                readingTime: 5
-            },
-            {
-                id: 5,
-                category: 'B',
-                title: 'First Blog Post in Category B',
-                summary: 'This is a summary of the first blog post in category B',
-                image: '',
-                file: 'blog-posts/post5.txt',
-                date: '2024-01-20',
-                readingTime: 5
-            },
-            {
-                id: 6,
-                category: 'B',
-                title: 'Second Blog Post in Category B',
-                summary: 'This is a summary of the second blog post in category B',
-                image: '',
-                file: 'blog-posts/post6.txt',
-                date: '2024-01-18',
-                readingTime: 5
-            },
-            {
-                id: 7,
-                category: 'B',
-                title: 'Third Blog Post in Category B',
-                summary: 'This is a summary of the third blog post in category B',
-                image: '',
-                file: 'blog-posts/post7.txt',
-                date: '2024-01-12',
-                readingTime: 5
-            },
-            {
-                id: 8,
-                category: 'B',
-                title: 'Fourth Blog Post in Category B',
-                summary: 'This is a summary of the fourth blog post in category B',
-                image: '',
-                file: 'blog-posts/post8.txt',
-                date: '2024-01-08',
-                readingTime: 5
-            }
-        ];
+    <script>
+        // ==== NAVBAR TITLE FUNCTIONALITY ====
 
-        // Portfolio data
-        // MANUAL EDIT IF MORE ADDITIONS
-        const portfolio = [
-            {
-                id: 1,
-                title: 'Time-Series Forecasting',
-                techStacks: 'Python, Airflow',
-                icon: 'fas fa-file-alt',
-                files: {
-                    goals: 'portfolio/portfolio1-goals.txt',
-                    methods: 'portfolio/portfolio1-methods.txt',
-                    painPoints: 'portfolio/portfolio1-pain-points.txt',
-                    improvements: 'portfolio/portfolio1-improvements.txt',
-                    impact: 'portfolio/portfolio1-impact.txt'
-                }
-            },
-            {
-                id: 2,
-                title: 'Document Information Extraction for e-KYC System',
-                techStacks: 'Python, Kubernetes, Docker',
-                icon: 'fas fa-file-alt',
-                files: {
-                    goals: 'portfolio/portfolio2-goals.txt',
-                    methods: 'portfolio/portfolio2-methods.txt',
-                    painPoints: 'portfolio/portfolio2-pain-points.txt',
-                    improvements: 'portfolio/portfolio2-improvements.txt',
-                    impact: 'portfolio/portfolio2-impact.txt'
-                }
-            }
-        ];
-
-        // Function to render portfolio projects
-        function renderPortfolioProjects() {
-            const container = document.getElementById('projectsContainer');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            portfolio.forEach((project, index) => {
-                const projectItem = document.createElement('div');
-                projectItem.className = 'project-item';
-                
-                projectItem.innerHTML = `
-                    <div class="project-info">
-                        <h3 class="project-title">${project.title}</h3>
-                        <p class="project-tech-stacks">${project.techStacks}</p>
-                    </div>
-                    <div class="project-icon-container">
-                        <div class="project-icon-circle" onclick="openProjectModal(${project.id})">
-                            <i class="${project.icon} project-icon"></i>
-                        </div>
-                    </div>
-                `;
-                
-                container.appendChild(projectItem);
+        // Function to scroll to top/first section
+        function scrollToTop(event) {
+            event.preventDefault();
+            document.querySelector('.first-section').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
             });
         }
 
-        // Function to open project modal
-        async function openProjectModal(projectId) {
-            const modal = document.getElementById('projectModal');
-            const modalHeader = document.getElementById('projectModalHeader');
-            const modalBody = document.getElementById('projectModalBody');
+        // Function to initialize rotating subtitles
+        function initializeRotatingSubtitles() {
+            // Customizable titles
+            const subtitles = [
+                "a Data Analyst",
+                "a Data Scientist", 
+                "an AI Engineer"
+            ];
             
-            const project = portfolio.find(p => p.id === projectId);
-            if (!project) return;
+            const subtitleContainer = document.getElementById('navbarSubtitle');
             
-            modalHeader.innerHTML = '';
-            modalBody.innerHTML = '<p>Loading...</p>';
-            modal.classList.add('active');
+            // Clear existing content
+            subtitleContainer.innerHTML = '';
             
+            // Add each subtitle as a span
+            subtitles.forEach((subtitle, index) => {
+                const span = document.createElement('span');
+                span.textContent = subtitle;
+                subtitleContainer.appendChild(span);
+            });
+            
+            // Adjust animation timing based on number of subtitles
+            const totalDuration = subtitles.length * 4; // 4 seconds per subtitle
+            
+            // Calculate percentage values
+            const startFadeIn = (3 / totalDuration * 100).toFixed(2);
+            const fullyVisible = (10 / totalDuration * 100).toFixed(2);
+            const startFadeOut = (28 / totalDuration * 100).toFixed(2);
+            const fullyHidden = (31 / totalDuration * 100).toFixed(2);
+            
+            // Update animation duration
+            const styleSheet = document.styleSheets[0];
             try {
-                // Load all sections from text files
-                const sections = ['goals', 'methods', 'painPoints', 'improvements', 'impact'];
-                const contentPromises = sections.map(section => {
-                    const filePath = project.files[section];
-                    if (!filePath) return Promise.resolve({ section, content: '' });
-                    
-                    return fetch(filePath)
-                        .then(response => {
-                            if (!response.ok) throw new Error(`Could not load ${section}`);
-                            return response.text();
-                        })
-                        .then(content => ({ section, content }))
-                        .catch(error => ({ section, content: `Error loading ${section}: ${error.message}` }));
-                });
-                
-                const sectionContents = await Promise.all(contentPromises);
-                
-                // Create modal header
-                const headerHTML = `
-                    <h1 class="project-modal-title">${project.title}</h1>
-                    <p class="project-modal-tech-stacks">${project.techStacks}</p>
-                `;
-                
-                // Create modal body with sections
-                let bodyHTML = '';
-                
-                // Section titles mapping
-                const sectionTitles = {
-                    goals: 'Goals',
-                    methods: 'Methods',
-                    painPoints: 'Pain Problem & Lesson Learned',
-                    improvements: 'Future Improvement',
-                    impact: 'Impact'
-                };
-                
-                sectionContents.forEach(({ section, content }) => {
-                    if (content.trim()) {
-                        const parsedContent = marked.parse(content);
-                        bodyHTML += `
-                            <div class="project-section">
-                                <h3 class="project-section-title">${sectionTitles[section] || section}</h3>
-                                <div class="project-section-content">
-                                    ${parsedContent}
-                                </div>
-                            </div>
-                        `;
+                styleSheet.insertRule(`
+                    @keyframes rotateWords {
+                        0% {
+                            opacity: 0;
+                            transform: translateY(10px);
+                        }
+                        ${startFadeIn}% {
+                            opacity: 0;
+                            transform: translateY(10px);
+                        }
+                        ${fullyVisible}% {
+                            opacity: 1;
+                            transform: translateY(0px);
+                        }
+                        ${startFadeOut}% {
+                            opacity: 1;
+                            transform: translateY(0px);
+                        }
+                        ${fullyHidden}% {
+                            opacity: 0;
+                            transform: translateY(-10px);
+                        }
+                        100% {
+                            opacity: 0;
+                            transform: translateY(-10px);
+                        }
                     }
-                });
-                
-                modalHeader.innerHTML = headerHTML;
-                modalBody.innerHTML = bodyHTML;
-                
-            } catch (error) {
-                modalBody.innerHTML = `
-                    <div style="color: #d32f2f; padding: 20px;">
-                        <p>Error loading project details: ${error.message}</p>
-                        <p style="margin-top: 20px; color: #666;">
-                            To create portfolio content, create a folder called "portfolio" and add .txt files for each section.
-                        </p>
-                    </div>
-                `;
+                `, styleSheet.cssRules.length);
+            } catch (e) {
+                console.warn("Could not insert animation rule:", e);
             }
-        }
-
-        // Function to close project modal
-        function closeProjectModal() {
-            document.getElementById('projectModal').classList.remove('active');
-        }
-
-        // Close project modal when clicking outside
-        document.getElementById('projectModal').addEventListener('click', (e) => {
-            if (e.target.id === 'projectModal') {
-                closeProjectModal();
-            }
-        });
-
-        // Social media data
-        const socialMedia = [
-            {
-                platform: 'github',
-                icon: 'fab fa-github',
-                url: 'https://github.com/muhammadefan',
-                name: 'GitHub'
-            },
-            {
-                platform: 'linkedin',
-                icon: 'fab fa-linkedin',
-                url: 'https://linkedin.com/in/muhammadefan',
-                name: 'LinkedIn'
-            },
-            // {
-            //     platform: 'twitter',
-            //     icon: 'fab fa-twitter',
-            //     url: 'https://twitter.com/yourusername',
-            //     name: 'Twitter'
-            // },
-            {
-                platform: 'instagram',
-                icon: 'fab fa-instagram',
-                url: 'https://instagram.com/efanmefanaf',
-                name: 'Instagram'
-            },
-            // {
-            //     platform: 'youtube',
-            //     icon: 'fab fa-youtube',
-            //     url: 'https://youtube.com/yourchannel',
-            //     name: 'YouTube'
-            // }
-        ];
-
-        // Function to render social media icons
-        function renderSocialMediaIcons() {
-            const container = document.getElementById('socialIcons');
-            if (!container) return;
             
-            container.innerHTML = '';
-            container.className = 'social-icons-container simple';
-            
-            socialMedia.forEach(social => {
-                const iconLink = document.createElement('a');
-                iconLink.className = 'social-icon-simple';
-                iconLink.href = social.url;
-                iconLink.target = '_blank';
-                iconLink.rel = 'noopener noreferrer';
-                iconLink.title = social.name;
-                iconLink.setAttribute('data-platform', social.platform);
-                
-                const icon = document.createElement('i');
-                icon.className = social.icon;
-                
-                iconLink.appendChild(icon);
-                container.appendChild(iconLink);
+            // Update individual animation delays
+            subtitles.forEach((_, index) => {
+                const delay = index * 4; // 4 seconds between each
+                try {
+                    styleSheet.insertRule(`
+                        .navbar-subtitle span:nth-child(${index + 1}) { 
+                            animation-delay: ${delay}s; 
+                        }
+                    `, styleSheet.cssRules.length);
+                } catch (e) {
+                    console.warn("Could not insert delay rule:", e);
+                }
             });
+            
+            // Update overall animation duration
+            subtitleContainer.style.animationDuration = `${totalDuration}s`;
+        }
+    
+        // Blog posts metadata load from JSON files
+        let blogPosts = [];
+        let portfolio = [];
+
+        // Fetch blog posts from JSON
+        async function initializeBlogPosts() {
+            try {
+                const response = await fetch('assets/blog-posts.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load blog posts');
+                }
+                blogPosts = await response.json();
+                loadBlogPosts(); // Call loadBlogPosts AFTER data is loaded
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+            }
         }
 
-        // Call this function when the page loads
+        // Initialize portfolio
+        async function initializePortfolio() {
+            try {
+                const response = await fetch('assets/portfolio.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load portfolio');
+                }
+                portfolio = await response.json();
+                renderPortfolioProjects(); // Call render AFTER data is loaded
+            } catch (error) {
+                console.error('Error loading portfolio:', error);
+            }
+        }
+
+        // Call initialization when page loads
         window.addEventListener('DOMContentLoaded', () => {
-            loadBlogPosts();
+            initializeRotatingSubtitles();
+            initializeBlogPosts();
+            initializePortfolio();
             renderSocialMediaIcons();
-            renderPortfolioProjects();
         });
 
+        // ==== SECTION 2: BLOG POST ====
         // MANUAL EDIT IF MORE ADDITIONS
         function loadBlogPosts() {
             // Get 4 most recent posts for each category
@@ -2212,19 +2258,22 @@
             const modalTitle = document.getElementById('modalTitle');
             const modalBody = document.getElementById('modalBody');
 
-            // Clear previous content
             modalTitle.innerHTML = '';
             modalBody.innerHTML = '<p>Loading...</p>';
             modal.classList.add('active');
 
             try {
-                const response = await fetch(post.file);
+                // ADD 'blog-posts/' prefix if not already in the path
+                const filePath = post.contentFile.startsWith('blog-posts/') 
+                    ? post.contentFile 
+                    : `blog-posts/${post.contentFile}`;
+                
+                const response = await fetch(filePath);
                 if (!response.ok) {
                     throw new Error('Could not load blog post');
                 }
                 const content = await response.text();
 
-                // Create the header section with metadata
                 const headerHTML = `
                     <div class="post-header">
                         <h1 class="post-title-modal">${post.title}</h1>
@@ -2241,18 +2290,16 @@
                     </div>
                 `;
 
-                // Create content section with better spacing
                 const contentHTML = marked.parse(content);
 
-                // Combine everything
                 modalTitle.innerHTML = headerHTML;
                 modalBody.innerHTML = `<div class="post-content">${contentHTML}</div>`;
                 
             } catch (error) {
                 modalBody.innerHTML = `
                     <div style="color: #d32f2f; padding: 20px;">
-                        <p>Error loading blog post. Make sure the file exists at: ${post.file}</p>
-                        <p style="margin-top: 20px; color: #666;">To create blog posts, create a folder called "blog-posts" and add .txt files with your content.</p>
+                        <p>Error loading blog post: ${error.message}</p>
+                        <p style="margin-top: 10px; color: #666;">File path: ${post.contentFile}</p>
                     </div>
                 `;
             }
@@ -2337,17 +2384,347 @@
             }
         });
 
-        // Navigation function (placeholder)
-        function navigateToPage(page) {
-            console.log('Navigating to:', page);
-            alert('Navigation to ' + page + ' (functionality to be implemented)');
+        // ==== SECTION 3: PROJECT PORTFOLIO ====
+        // Filter Portfolio
+        let currentPortfolioFilter = 'all';
+        function filterPortfolio(category) {
+            currentPortfolioFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.category-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Re-render projects with filter
+            renderPortfolioProjects();
         }
 
-        // New function to scroll to blog section
+        // Portfolio List
+        function renderPortfolioProjects() {
+            const container = document.getElementById('projectsContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            // Filter projects based on current filter
+            const filteredProjects = currentPortfolioFilter === 'all' 
+                ? portfolio 
+                : portfolio.filter(p => p.category === currentPortfolioFilter);
+            
+            filteredProjects.forEach((project, index) => {
+                const categoryClass = `category-${project.category.toLowerCase()}-label`;
+                const projectItem = document.createElement('div');
+                projectItem.className = 'project-item';
+                
+                projectItem.innerHTML = `
+                    <div class="project-info">
+                        <span class="project-category-label ${categoryClass}">${project.category}</span>
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-tech-stacks">${project.techStacks}</p>
+                    </div>
+                    <div class="project-icon-container">
+                        <div class="project-icon-circle" onclick="openProjectModal(${project.id})">
+                            <i class="${project.icon} project-icon"></i>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(projectItem);
+            });
+        }
+
+        // async function openProjectModal(projectId) {
+        //     const modal = document.getElementById('projectModal');
+        //     const modalHeader = document.getElementById('projectModalHeader');
+        //     const modalBody = document.getElementById('projectModalBody');
+            
+        //     const project = portfolio.find(p => p.id === projectId);
+        //     if (!project) return;
+            
+        //     modalHeader.innerHTML = '';
+        //     modalBody.innerHTML = '<p>Loading...</p>';
+        //     modal.classList.add('active');
+            
+        //     try {
+        //         const sections = [
+        //             { key: 'goalsFile', title: 'Goals' },
+        //             { key: 'methodsFile', title: 'Methods' },
+        //             { key: 'painPointsFile', title: 'Pain Problem & Lesson Learned' },
+        //             { key: 'improvementsFile', title: 'Future Improvement' },
+        //             { key: 'impactFile', title: 'Impact' }
+        //         ];
+                
+        //         const contentPromises = sections.map(section => {
+        //             const fileName = project[section.key];
+        //             if (!fileName) return Promise.resolve({ title: section.title, content: '' });
+                    
+        //             // ADD 'portfolio/' prefix if not already in the path
+        //             const filePath = fileName.startsWith('portfolio/') 
+        //                 ? fileName 
+        //                 : `portfolio/${fileName}`;
+                    
+        //             return fetch(filePath)
+        //                 .then(response => {
+        //                     if (!response.ok) throw new Error(`Could not load ${section.title}`);
+        //                     return response.text();
+        //                 })
+        //                 .then(content => ({ title: section.title, content }))
+        //                 .catch(error => ({ 
+        //                     title: section.title, 
+        //                     content: `Error loading ${section.title}: ${error.message}` 
+        //                 }));
+        //         });
+                
+        //         const sectionContents = await Promise.all(contentPromises);
+                
+        //         const headerHTML = `
+        //             <h1 class="project-modal-title">${project.title}</h1>
+        //             <p class="project-modal-tech-stacks">${project.techStacks}</p>
+        //         `;
+                
+        //         let bodyHTML = '';
+        //         sectionContents.forEach(({ title, content }) => {
+        //             if (content.trim()) {
+        //                 const parsedContent = marked.parse(content);
+        //                 bodyHTML += `
+        //                     <div class="project-section">
+        //                         <h3 class="project-section-title">${title}</h3>
+        //                         <div class="project-section-content">
+        //                             ${parsedContent}
+        //                         </div>
+        //                     </div>
+        //                 `;
+        //             }
+        //         });
+                
+        //         modalHeader.innerHTML = headerHTML;
+        //         modalBody.innerHTML = bodyHTML;
+                
+        //     } catch (error) {
+        //         modalBody.innerHTML = `
+        //             <div style="color: #d32f2f; padding: 20px;">
+        //                 <p>Error loading project details: ${error.message}</p>
+        //             </div>
+        //         `;
+        //     }
+        // }
+        async function openProjectModal(projectId) {
+            const modal = document.getElementById('projectModal');
+            const modalHeader = document.getElementById('projectModalHeader');
+            const modalBody = document.getElementById('projectModalBody');
+            
+            const project = portfolio.find(p => p.id === projectId);
+            if (!project) return;
+            
+            modalHeader.innerHTML = '';
+            modalBody.innerHTML = '<p>Loading...</p>';
+            modal.classList.add('active');
+            
+            try {
+                // Define sections with their config
+                const sections = [
+                    { 
+                        key: 'goals', 
+                        title: 'Goals',
+                        fallbackKey: 'goalsFile' // For backward compatibility
+                    },
+                    { 
+                        key: 'methods', 
+                        title: 'Methods',
+                        fallbackKey: 'methodsFile'
+                    },
+                    { 
+                        key: 'painPoints', 
+                        title: 'Pain Points & Lessons Learned',
+                        fallbackKey: 'painPointsFile'
+                    },
+                    { 
+                        key: 'improvements', 
+                        title: 'Future Improvements',
+                        fallbackKey: 'improvementsFile'
+                    },
+                    { 
+                        key: 'impact', 
+                        title: 'Impact',
+                        fallbackKey: 'impactFile'
+                    }
+                ];
+                
+                // Process each section
+                const sectionPromises = sections.map(async (section) => {
+                    let content = '';
+                    
+                    // Check for new flexible format first
+                    const sectionData = project[section.key];
+                    
+                    if (!sectionData) {
+                        // Fallback to old file reference format
+                        const fileName = project[section.fallbackKey];
+                        if (fileName) {
+                            content = await loadContentFromFile(fileName, 'portfolio/');
+                        }
+                    } else if (typeof sectionData === 'string') {
+                        // String: treat as file reference
+                        content = await loadContentFromFile(sectionData, 'portfolio/');
+                    } else if (typeof sectionData === 'object' && sectionData.type === 'text') {
+                        // Object with type='text': use direct content
+                        content = sectionData.content || '';
+                    } else if (typeof sectionData === 'object' && sectionData.content) {
+                        // Object with content property
+                        content = sectionData.content;
+                    } else {
+                        // Other cases, convert to string
+                        content = String(sectionData);
+                    }
+                    
+                    return { title: section.title, content };
+                });
+                
+                const sectionContents = await Promise.all(sectionPromises);
+                
+                // Create header
+                const headerHTML = `
+                    <h1 class="project-modal-title">${project.title}</h1>
+                    <p class="project-modal-tech-stacks">${project.techStacks}</p>
+                `;
+                
+                // Create body with sections
+                let bodyHTML = '';
+                sectionContents.forEach(({ title, content }) => {
+                    if (content && content.trim()) {
+                        const parsedContent = marked.parse(content);
+                        bodyHTML += `
+                            <div class="project-section">
+                                <h3 class="project-section-title">${title}</h3>
+                                <div class="project-section-content">
+                                    ${parsedContent}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                modalHeader.innerHTML = headerHTML;
+                modalBody.innerHTML = bodyHTML;
+                
+            } catch (error) {
+                console.error('Error loading project details:', error);
+                modalBody.innerHTML = `
+                    <div style="color: #d32f2f; padding: 20px;">
+                        <p>Error loading project details: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Helper function to load content from file
+        async function loadContentFromFile(fileName, basePath = '') {
+            try {
+                // Add base path if not already included
+                const filePath = fileName.startsWith(basePath) 
+                    ? fileName 
+                    : `${basePath}${fileName}`;
+                
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`Could not load file: ${fileName}`);
+                }
+                return await response.text();
+            } catch (error) {
+                console.error(`Error loading file ${fileName}:`, error);
+                return `**Error loading content**: ${error.message}`;
+            }
+        }
+
+        // Function to close project modal
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.remove('active');
+        }
+
+        // Close project modal when clicking outside
+        document.getElementById('projectModal').addEventListener('click', (e) => {
+            if (e.target.id === 'projectModal') {
+                closeProjectModal();
+            }
+        });
+
+        // ==== FOOTER: SOCIAL MEDIA ====
+        const socialMedia = [
+            {
+                platform: 'github',
+                icon: 'fab fa-github',
+                url: 'https://github.com/muhammadefan',
+                name: 'GitHub'
+            },
+            {
+                platform: 'linkedin',
+                icon: 'fab fa-linkedin',
+                url: 'https://linkedin.com/in/muhammadefan',
+                name: 'LinkedIn'
+            },
+            {
+                platform: 'instagram',
+                icon: 'fab fa-instagram',
+                url: 'https://instagram.com/efanmefanaf',
+                name: 'Instagram'
+            }
+        ];
+
+        // Function to render social media icons
+        function renderSocialMediaIcons() {
+            const container = document.getElementById('socialIcons');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            container.className = 'social-icons-container simple';
+            
+            socialMedia.forEach(social => {
+                const iconLink = document.createElement('a');
+                iconLink.className = 'social-icon-simple';
+                iconLink.href = social.url;
+                iconLink.target = '_blank';
+                iconLink.rel = 'noopener noreferrer';
+                iconLink.title = social.name;
+                iconLink.setAttribute('data-platform', social.platform);
+                
+                const icon = document.createElement('i');
+                icon.className = social.icon;
+                
+                iconLink.appendChild(icon);
+                container.appendChild(iconLink);
+            });
+        }
+
+        // ==== OTHERS ====
+        // Navigation function
+        function navigateToPage(page) {
+            if (page === 'article') {
+                scrollToBlog();
+            } else if (page == 'portfolio'){
+                scrollToPortfolio();
+            } else {
+                console.log('Navigating to:', page);
+                alert('Navigation to ' + page + ' (functionality to be implemented)');
+            }
+        }
+
+        // Function to scroll to blog section
         function scrollToBlog() {
             const blogSection = document.querySelector('.blog-section');
             if (blogSection) {
                 blogSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Function to scroll to portfolio section
+        function scrollToPortfolio() {
+            const portfolioSection = document.querySelector('.projects-section');
+            if (portfolioSection) {
+                portfolioSection.scrollIntoView({ 
                     behavior: 'smooth',
                     block: 'start'
                 });
@@ -2449,7 +2826,7 @@
             }
         }
 
-        // Helper function to add messages to chat (keep your existing function)
+        // Helper function to add messages to chat
         function addChatMessage(label, text, boxClass) {
             const chatHistory = document.getElementById('chatHistory');
             

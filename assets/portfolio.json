@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "category": "Predictive",
+        "title": "Time-Series Forecasting",
+        "techStacks": "Python, Airflow",
+        "icon": "fas fa-file-alt",
+        "goals": {
+            "type": "text",
+            "content": "This is direct text content for methods..."
+        },
+        "methods": "portfolio1-methods.txt",
+        "painPoints": "portfolio1-pain-points.txt",
+        "improvements": "portfolio1-improvement.txt",
+        "impact": "portfolio1-impact.txt"
+    },
+    {
+        "id": 2,
+        "category": "Predictive",
+        "title": "Document Information Extraction for e-KYC System",
+        "techStacks": "Python, Kubernetes, Docker",
+        "icon": "fas fa-file-alt",
+        "goals": {
+            "type": "text",
+            "content": "This is direct text content for methods..."
+        },
+        "methods": "portfolio2-methods.txt",
+        "painPoints": "portfolio2-pain-points.txt",
+        "improvements": "portfolio2-improvement.txt",
+        "impact": "portfolio2-impact.txt"
+    }
+]

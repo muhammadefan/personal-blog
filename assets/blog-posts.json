@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "category": "A",
+        "title": "First Blog Post in Category A",
+        "summary": "This is a summary...",
+        "contentFile": "post1.txt",
+        "date": "2024-01-15",
+        "readingTime": 5
+    },
+    {
+        "id": 2,
+        "category": "A",
+        "title": "Second Blog Post in Category A",
+        "summary": "This is a summary of the second blog post in category A",
+        "contentFile": "post2.txt",
+        "date": "2024-01-10",
+        "readingTime": 5
+    },
+    {
+        "id": 3,
+        "category": "A",
+        "title": "Third Blog Post in Category A",
+        "summary": "This is a summary of the third blog post in category A",
+        "contentFile": "post3.txt",
+        "date": "2024-01-05",
+        "readingTime": 5
+    },
+    {
+        "id": 4,
+        "category": "A",
+        "title": "Fourth Blog Post in Category A",
+        "summary": "This is a summary of the fourth blog post in category A",
+        "contentFile": "post4.txt",
+        "date": "2024-01-01",
+        "readingTime": 5
+    },
+    {
+        "id": 5,
+        "category": "B",
+        "title": "First Blog Post in Category B",
+        "summary": "This is a summary of the first blog post in category B",
+        "contentFile": "post5.txt",
+        "date": "2024-01-20",
+        "readingTime": 5
+    },
+    {
+        "id": 6,
+        "category": "B",
+        "title": "Second Blog Post in Category B",
+        "summary": "This is a summary of the second blog post in category B",
+        "contentFile": "post6.txt",
+        "date": "2024-01-18",
+        "readingTime": 5
+    },
+    {
+        "id": 7,
+        "category": "B",
+        "title": "Third Blog Post in Category B",
+        "summary": "This is a summary of the third blog post in category B",
+        "contentFile": "post7.txt",
+        "date": "2024-01-12",
+        "readingTime": 5
+    },
+    {
+        "id": 8,
+        "category": "B",
+        "title": "Fourth Blog Post in Category B",
+        "summary": "This is a summary of the fourth blog post in category B",
+        "contentFile": "post8.txt",
+        "date": "2024-01-08",
+        "readingTime": 5
+    }
+]
