@@ -7,12 +7,15 @@
         "icon": "fas fa-file-alt",
         "goals": {
             "type": "text",
-            "content": "This is direct text content for methods..."
+            "content": "Generating revenue."
         },
         "methods": "portfolio1-methods.txt",
         "painPoints": "portfolio1-pain-points.txt",
         "improvements": "portfolio1-improvement.txt",
-        "impact": "portfolio1-impact.txt"
+        "impact": {
+            "type": "text",
+            "content": "Get 100% revenue hikes."
+        }
     },
     {
         "id": 2,
@@ -27,6 +30,63 @@
         "methods": "portfolio2-methods.txt",
         "painPoints": "portfolio2-pain-points.txt",
         "improvements": "portfolio2-improvement.txt",
-        "impact": "portfolio2-impact.txt"
+        "impact": {
+            "type": "text",
+            "content": "Generating revenue."
+        }
+    },
+    {
+        "id": 3,
+        "category": "Prescriptive",
+        "title": "Document Information Extraction for e-KYC System",
+        "techStacks": "Python, Kubernetes, Docker",
+        "icon": "fas fa-file-alt",
+        "goals": {
+            "type": "text",
+            "content": "This is direct text content for methods..."
+        },
+        "methods": "portfolio2-methods.txt",
+        "painPoints": "portfolio2-pain-points.txt",
+        "improvements": "portfolio2-improvement.txt",
+        "impact": {
+            "type": "text",
+            "content": "Generating revenue."
+        }
+    },
+    {
+        "id": 4,
+        "category": "Descriptive",
+        "title": "Document Information Extraction for e-KYC System",
+        "techStacks": "Python, Kubernetes, Docker",
+        "icon": "fas fa-file-alt",
+        "goals": {
+            "type": "text",
+            "content": "This is direct text content for methods..."
+        },
+        "methods": "portfolio2-methods.txt",
+        "painPoints": "portfolio2-pain-points.txt",
+        "improvements": "portfolio2-improvement.txt",
+        "impact": {
+            "type": "text",
+            "content": "Generating revenue."
+        }
+    },
+    {
+        "id": 5,
+        "category": "Diagnostics",
+        "title": "Document Information Extraction for e-KYC System",
+        "techStacks": "Python, Kubernetes, Docker",
+        "icon": "fas fa-file-alt",
+        "goals": {
+            "type": "text",
+            "content": "This is direct text content for methods..."
+        },
+        "methods": "portfolio2-methods.txt",
+        "painPoints": "portfolio2-pain-points.txt",
+        "improvements": "portfolio2-improvement.txt",
+        "impact": {
+            "type": "text",
+            "content": "Generating revenue."
+        }
     }
 ]

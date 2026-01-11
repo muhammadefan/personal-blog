@@ -1,5 +1,48 @@
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Sebagai pembuka seri pemrogaman Python, mari berkenalan dengan Variabel dan Operasi. Silakan dibaca, dipahami, juga dipraktikan hingga jari-jari anda hafal dengan sintaks-sintaksnya :)
+### Variabel
+berfungsi untuk menyimpan suatu nilai atau sekelompok nilai. Variabel dapat memudahkan kita untuk memanggil suatu nilai apabila penggunaan nilai tersebut dilakukan berkali-kali. Adapun aturan dalam pemberian nama variabel, yaitu:
+1. bisa dimulai dengan karakter huruf abjad (a-z atau A-Z) atau karakter khusus: _ (underscore) saja, contoh: `nama_buah`
+2. tidak bisa menggunakan karakter angka di awal nama variabel, angka hanya dapat digunakan jika didahului dengan karakter seperti yang disebutkan pada poin pertama, contoh: nama_buah2
+3. tidak boleh sama dengan nama keyword yang ada di Python
+
+Contoh:
+- Mendefinisikan satu variabel:
+- Di kondisi tertentu, kita perlu mendefinisikan dua variabel sekaligus dalam satu waktu, dapat dilakukan seperti berikut:
+- Selain itu, kita dapat menukar nilai dari suatu variabel ke variabel lain yang memiliki nilai tertentu:
+
+Setelah memahami cara inisialisasi variabel di atas, juga perlu diketahui dua macam variabel berdasarkan pada aturan penggunaannya, yaitu:
+
+**1. Variabel Global:** merupakan variabel yang di-inisialisasi di luar blok function dan dapat dipanggil di seluruh blok kode, contohnya seperti yang ada di atas.
+
+**2. Variabel Lokal:** merupakan variabel yang di-inisialisasikan di dalam blok function dan hanya dapat dipanggil di dalam blok function saja, contohnya dapat dipahami di Python: Function & Anonymous Function.
+
+---
+
+### Operasi
+terdiri atas perintah untuk melakukan operasi matematis seperti: aritmatika, perbandingan maupun bitwise. Selain digunakan pada data angka, operasi juga dapat diaplikasikan pada data huruf, tentunya ada aturan perihal ini.
+
+#### Operasi Aritmatika
+- Penjumlahan, operator yang digunakan: `+`
+- Pengurangan, operator yang digunakan: `—`
+- Perkalian, operator yang digunakan: `*`
+- Pembagian, operator yang digunakan: `/` atau `//`
+- Modulo, operator yang digunakan: `%`
+- Perpangkatan, operator yang digunakan: `**`
+
+#### Operasi Perbandingan
+- Perbandingan kesamaan atau ketidaksamaan antardata, operator yang digunakan: `==` atau `!=`
+- Perbandingan ukuran antardata, operator yang digunakan: `>` atau `<`
+- Perbandingan ukuran antardata, operator yang digunakan: `>=` atau `<=`
+
+#### Operasi Bitwise
+Jika Pythoneer baru mengetahui perihal operasi biner atau bitwise, bisa dipelajari lebih lanjut mengenai cara perhitungannya di sini.
+- AND menggunakan operator: `&` atau `and`
+- OR menggunakan operator: `|` atau `or`
+- XOR menggunakan operator: `^`
+- Shifting menggunakan operator: `<<` atau `>>`
+
+<p style="text-align: center; font-size: 30px">...</p>
+
+Sekian pembahasan untuk seri yang pertama, jangan berhenti di sini, silakan kunjungi postingan selanjutnya mengenai Tipe Data & I/O. Cheers.
+
+Terima kasih!

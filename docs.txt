@@ -55,3 +55,108 @@ url: https://www.freepik.com/free-photo/detailed-structure-marble-natural-patter
                 <p style="margin-top: 20px; color: #666;">To create blog posts, create a folder called "blog-posts" and add .txt files with your content.</p>`;
             }
         }
+
+
+        // async function openProjectModal(projectId) {
+        //     const modal = document.getElementById('projectModal');
+        //     const modalHeader = document.getElementById('projectModalHeader');
+        //     const modalBody = document.getElementById('projectModalBody');
+            
+        //     const project = portfolio.find(p => p.id === projectId);
+        //     if (!project) return;
+            
+        //     modalHeader.innerHTML = '';
+        //     modalBody.innerHTML = '<p>Loading...</p>';
+        //     modal.classList.add('active');
+            
+        //     try {
+        //         const sections = [
+        //             { key: 'goalsFile', title: 'Goals' },
+        //             { key: 'methodsFile', title: 'Methods' },
+        //             { key: 'painPointsFile', title: 'Pain Problem & Lesson Learned' },
+        //             { key: 'improvementsFile', title: 'Future Improvement' },
+        //             { key: 'impactFile', title: 'Impact' }
+        //         ];
+                
+        //         const contentPromises = sections.map(section => {
+        //             const fileName = project[section.key];
+        //             if (!fileName) return Promise.resolve({ title: section.title, content: '' });
+                    
+        //             // ADD 'portfolio/' prefix if not already in the path
+        //             const filePath = fileName.startsWith('portfolio/') 
+        //                 ? fileName 
+        //                 : `portfolio/${fileName}`;
+                    
+        //             return fetch(filePath)
+        //                 .then(response => {
+        //                     if (!response.ok) throw new Error(`Could not load ${section.title}`);
+        //                     return response.text();
+        //                 })
+        //                 .then(content => ({ title: section.title, content }))
+        //                 .catch(error => ({ 
+        //                     title: section.title, 
+        //                     content: `Error loading ${section.title}: ${error.message}` 
+        //                 }));
+        //         });
+                
+        //         const sectionContents = await Promise.all(contentPromises);
+                
+        //         const headerHTML = `
+        //             <h1 class="project-modal-title">${project.title}</h1>
+        //             <p class="project-modal-tech-stacks">${project.techStacks}</p>
+        //         `;
+                
+        //         let bodyHTML = '';
+        //         sectionContents.forEach(({ title, content }) => {
+        //             if (content.trim()) {
+        //                 const parsedContent = marked.parse(content);
+        //                 bodyHTML += `
+        //                     <div class="project-section">
+        //                         <h3 class="project-section-title">${title}</h3>
+        //                         <div class="project-section-content">
+        //                             ${parsedContent}
+        //                         </div>
+        //                     </div>
+        //                 `;
+        //             }
+        //         });
+                
+        //         modalHeader.innerHTML = headerHTML;
+        //         modalBody.innerHTML = bodyHTML;
+                
+        //     } catch (error) {
+        //         modalBody.innerHTML = `
+        //             <div style="color: #d32f2f; padding: 20px;">
+        //                 <p>Error loading project details: ${error.message}</p>
+        //             </div>
+        //         `;
+        //     }
+        // }
+
+
+        function renderBlogCards(containerId, posts) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                card.onclick = () => openBlogPost(post);
+
+                card.innerHTML = `
+                    <div class="blog-image">
+                        <h3 class="blog-title">${post.title}</h3>    
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-summary">${post.summary}</p>
+                        <div class="reading-time">                         
+                            <i class="far fa-clock"></i>                  
+                            <span>${post.readingTime} ${post.readingTime === 1 ? 'minute' : 'minutes'}</span>
+                        </div>                                            
+                        <a href="#" class="read-more">read more</a>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }

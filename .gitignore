@@ -1,3 +1,6 @@
 .DS_Store
 .env*
 config.local.js
+generate-embeddings.html
+private-docs/
+private-documents.json
