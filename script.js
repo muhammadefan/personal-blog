@@ -139,7 +139,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 function loadBlogPosts() {
     // Get 4 most recent posts for each category
     const categoryAPosts = blogPosts
-        .filter(post => post.category === 'python-programming')
+        .filter(post => post.category === 'programming')
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 4);
     
@@ -174,6 +174,21 @@ function renderBlogCards(containerId, posts) {
             ? `<img src="${post.image}" alt="${post.title}">` 
             : `<div class="blog-image-placeholder"></div>`;
 
+        // card.innerHTML = `
+        //     <div class="blog-image">
+        //         ${imageHTML}
+        //     </div>
+        //     <div class="blog-content">
+        //         <div class="blog-meta">
+        //             <span>${formattedDate}</span>
+        //             <span class="blog-meta-separator">•</span>
+        //             <span>${post.readingTime} min read</span>
+        //         </div>
+        //         <h3 class="blog-title">${post.title}</h3>
+        //         <p class="blog-summary">${post.summary}</p>
+        //     </div>
+        // `;
+
         card.innerHTML = `
             <div class="blog-image">
                 ${imageHTML}
@@ -186,6 +201,11 @@ function renderBlogCards(containerId, posts) {
                 </div>
                 <h3 class="blog-title">${post.title}</h3>
                 <p class="blog-summary">${post.summary}</p>
+                <div class="blog-card-footer">
+                    <button class="blog-read-btn">
+                        Read Article <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
         `;
 
@@ -663,7 +683,7 @@ function cosineSimilarity(vecA, vecB) {
 }
 
 // Search for relevant documents using embeddings
-async function searchWithEmbeddings(query, apiKey, topK = 3) {
+async function searchWithEmbeddings(query, topK = 3) {
     if (!isEmbeddingsLoaded || !embeddingsData) {
         console.warn('Embeddings not loaded, skipping RAG');
         return [];
@@ -672,24 +692,27 @@ async function searchWithEmbeddings(query, apiKey, topK = 3) {
     try {
         console.log('🔍 Searching for relevant documents...');
         
-        // Get embedding for the query
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1/models/text-embedding-004:embedContent?key=${apiKey}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    content: { parts: [{ text: query }] }
-                })
-            }
-        );
+        // Get embedding for the query via Netlify function
+        const response = await fetch('/.netlify/functions/gemini-proxy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'embed',
+                query: query
+            })
+        });
         
         if (!response.ok) {
             throw new Error('Could not generate query embedding');
         }
         
         const data = await response.json();
-        const queryEmbedding = data.embedding.values;
+        
+        if (!data.success) {
+            throw new Error(data.error || 'Embedding generation failed');
+        }
+        
+        const queryEmbedding = data.embedding;
         
         // Calculate similarity with all documents
         const similarities = embeddingsData.embeddings.map(doc => ({
@@ -784,57 +807,84 @@ async function sendQuestion() {
     
     try {
         let answer;
-        let apiKey;
         
-        // Get API key based on environment
-        if (CONFIG.isLocal && typeof LOCAL_CONFIG !== 'undefined') {
-            apiKey = LOCAL_CONFIG.GEMINI_API_KEY;
-        } else {
-            // For production, you'll need to modify this based on your setup
-            // Option 1: Use Netlify function that handles API key
-            // Option 2: Use a different approach
-            throw new Error('Production RAG not yet configured. Please see documentation.');
-        }
+        // Check if running locally or in production
+        const isLocalDevelopment = window.location.hostname === 'localhost' || 
+                                   window.location.hostname === '127.0.0.1';
         
-        // RAG: Search for relevant documents
-        let relevantDocs = [];
-        let context = '';
-        
-        if (isEmbeddingsLoaded) {
-            console.log('🤖 Using RAG (Retrieval-Augmented Generation)');
-            relevantDocs = await searchWithEmbeddings(question, apiKey, 3);
+        if (isLocalDevelopment && typeof LOCAL_CONFIG !== 'undefined') {
+            // ===================================
+            // LOCAL DEVELOPMENT (Direct API call)
+            // ===================================
+            console.log('🏠 Running in LOCAL mode - Direct API call');
+            const apiKey = LOCAL_CONFIG.GEMINI_API_KEY;
             
-            // Load content for top results
-            const docContents = await Promise.all(
-                relevantDocs.map(async (doc) => {
-                    const content = await loadDocumentContent(doc.id, doc.type);
-                    return content ? {
-                        title: doc.title,
-                        content: content,
-                        type: doc.type,
-                        similarity: doc.similarity
-                    } : null;
-                })
-            );
+            // RAG: Search for relevant documents
+            let relevantDocs = [];
+            let context = '';
             
-            // Filter out nulls and build context
-            const validDocs = docContents.filter(doc => doc !== null);
-            
-            if (validDocs.length > 0) {
-                context = validDocs
-                    .map(doc => `Document: ${doc.title}\nType: ${doc.type}\nContent: ${doc.content}`)
-                    .join('\n\n---\n\n');
+            if (isEmbeddingsLoaded) {
+                console.log('🤖 Using RAG (Retrieval-Augmented Generation)');
                 
-                console.log(`✓ Using ${validDocs.length} documents as context`);
+                // Direct embedding call (local)
+                const embedResponse = await fetch(
+                    `https://generativelanguage.googleapis.com/v1/models/text-embedding-004:embedContent?key=${apiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            content: { parts: [{ text: question }] }
+                        })
+                    }
+                );
+                
+                if (embedResponse.ok) {
+                    const embedData = await embedResponse.json();
+                    const queryEmbedding = embedData.embedding.values;
+                    
+                    // Calculate similarities
+                    const similarities = embeddingsData.embeddings.map(doc => ({
+                        id: doc.id,
+                        title: doc.title,
+                        type: doc.type,
+                        category: doc.category,
+                        similarity: cosineSimilarity(queryEmbedding, doc.embedding),
+                        metadata: doc.metadata || {}
+                    }));
+                    
+                    relevantDocs = similarities
+                        .sort((a, b) => b.similarity - a.similarity)
+                        .slice(0, 3);
+                }
+                
+                // Load content for top results
+                const docContents = await Promise.all(
+                    relevantDocs.map(async (doc) => {
+                        const content = await loadDocumentContent(doc.id, doc.type);
+                        return content ? {
+                            title: doc.title,
+                            content: content,
+                            type: doc.type,
+                            similarity: doc.similarity
+                        } : null;
+                    })
+                );
+                
+                const validDocs = docContents.filter(doc => doc !== null);
+                
+                if (validDocs.length > 0) {
+                    context = validDocs
+                        .map(doc => `Document: ${doc.title}\nType: ${doc.type}\nContent: ${doc.content}`)
+                        .join('\n\n---\n\n');
+                    
+                    console.log(`✓ Using ${validDocs.length} documents as context`);
+                }
             }
-        } else {
-            console.log('⚠ RAG not available, using direct response');
-        }
-        
-        // Build prompt with or without context
-        let prompt;
-        if (context) {
-            prompt = `You are a helpful AI assistant for a personal website/blog. Answer the user's question based on the following documents from the website.
+            
+            // Build prompt
+            let prompt;
+            if (context) {
+                prompt = `You are a helpful AI assistant for a personal website/blog. Answer the user's question based on the following documents from the website.
 
 IMPORTANT INSTRUCTIONS:
 - Answer based ONLY on the information in the provided documents
@@ -849,45 +899,140 @@ ${context}
 User Question: ${question}
 
 Answer:`;
-        } else {
-            // Fallback without RAG
-            prompt = `You are a helpful AI assistant. Please answer the following question concisely and helpfully:
+            } else {
+                prompt = `You are a helpful AI assistant. Please answer the following question concisely and helpfully:
 
 ${question}`;
-        }
-        
-        // Call Gemini API
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-            {
+            }
+            
+            // Direct generation call (local)
+            const response = await fetch(
+                `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: prompt }]
+                        }]
+                    })
+                }
+            );
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || 'API request failed');
+            }
+            
+            const data = await response.json();
+            answer = data.candidates[0].content.parts[0].text;
+            
+            // Add AI response with sources
+            let messageText = answer;
+            // if (relevantDocs.length > 0) {
+            //     const sources = relevantDocs.map(doc => 
+            //         `${doc.type === 'blog' ? '📄' : '🔒'} ${doc.title}`
+            //     ).join(', ');
+            //     messageText += `\n\n**Sources used:** ${sources}`;
+            // }
+            
+            addChatMessage('AI response', messageText, 'response-box');
+            
+        } else {
+            // ===================================
+            // PRODUCTION (Netlify Function)
+            // ===================================
+            console.log('🌐 Running in PRODUCTION mode - Using Netlify Functions');
+            
+            // RAG: Search for relevant documents via Netlify
+            let relevantDocs = [];
+            let context = '';
+            
+            if (isEmbeddingsLoaded) {
+                console.log('🤖 Using RAG (Retrieval-Augmented Generation)');
+                relevantDocs = await searchWithEmbeddings(question, 3);
+                
+                // Load content for top results
+                const docContents = await Promise.all(
+                    relevantDocs.map(async (doc) => {
+                        const content = await loadDocumentContent(doc.id, doc.type);
+                        return content ? {
+                            title: doc.title,
+                            content: content,
+                            type: doc.type,
+                            similarity: doc.similarity
+                        } : null;
+                    })
+                );
+                
+                const validDocs = docContents.filter(doc => doc !== null);
+                
+                if (validDocs.length > 0) {
+                    context = validDocs
+                        .map(doc => `Document: ${doc.title}\nType: ${doc.type}\nContent: ${doc.content}`)
+                        .join('\n\n---\n\n');
+                    
+                    console.log(`✓ Using ${validDocs.length} documents as context`);
+                }
+            }
+            
+            // Build prompt
+            let prompt;
+            if (context) {
+                prompt = `You are a helpful AI assistant for a personal website/blog. Answer the user's question based on the following documents from the website.
+
+IMPORTANT INSTRUCTIONS:
+- Answer based ONLY on the information in the provided documents
+- If the answer is not in the documents, politely say you don't have that information in the knowledge base
+- Be conversational and helpful
+- Keep your answer concise but complete
+- If you reference information, mention which document it came from
+
+Documents from the website:
+${context}
+
+User Question: ${question}
+
+Answer:`;
+            } else {
+                prompt = `You are a helpful AI assistant. Please answer the following question concisely and helpfully:
+
+${question}`;
+            }
+            
+            // Call Netlify function for generation
+            const response = await fetch('/.netlify/functions/gemini-rag', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: prompt }]
-                    }]
+                    action: 'generate',
+                    prompt: prompt
                 })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        );
-        
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error?.message || 'API request failed');
+            
+            const data = await response.json();
+            
+            if (!data.success) {
+                throw new Error(data.error || 'Unknown error');
+            }
+            
+            answer = data.answer;
+            
+            // Add AI response with sources
+            let messageText = answer;
+            if (relevantDocs.length > 0) {
+                const sources = relevantDocs.map(doc => 
+                    `${doc.type === 'blog' ? '📄' : '🔒'} ${doc.title}`
+                ).join(', ');
+                messageText += `\n\n**Sources used:** ${sources}`;
+            }
+            
+            addChatMessage('AI response', messageText, 'response-box');
         }
-        
-        const data = await response.json();
-        answer = data.candidates[0].content.parts[0].text;
-        
-        // Add AI response to chat with sources (if using RAG)
-        let messageText = answer;
-        if (relevantDocs.length > 0) {
-            const sources = relevantDocs.map(doc => 
-                `${doc.type === 'blog' ? '📄' : '🔒'} ${doc.title}`
-            ).join(', ');
-            messageText += `\n\n**Sources used:** ${sources}`;
-        }
-        
-        addChatMessage('AI response', messageText, 'response-box');
         
     } catch (error) {
         // Add error message to chat
@@ -899,101 +1044,6 @@ ${question}`;
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
 }
-
-// Send question to Gemini API
-// async function sendQuestion() {
-//     const input = document.getElementById('questionInput');
-//     const question = input.value.trim();
-    
-//     if (!question) {
-//         alert('Please write a question first');
-//         return;
-//     }
-    
-//     const chatHistory = document.getElementById('chatHistory');
-//     const loading = document.getElementById('loading');
-//     const sendBtn = document.getElementById('sendBtn');
-    
-//     // Add user question to chat
-//     addChatMessage('Your question', question, 'question-box');
-    
-//     // Clear input and disable send button
-//     input.value = '';
-//     loading.classList.add('active');
-//     sendBtn.disabled = true;
-    
-//     try {
-//         let answer;
-        
-//         if (CONFIG.isLocal && typeof LOCAL_CONFIG !== 'undefined') {
-//             // LOCAL DEVELOPMENT: Call Gemini API directly
-//             console.log('📍 Making direct API call (local mode)');
-            
-//             const response = await fetch(
-//                 `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${LOCAL_CONFIG.GEMINI_API_KEY}`,
-//                 {
-//                     method: 'POST',
-//                     headers: {
-//                         'Content-Type': 'application/json',
-//                     },
-//                     body: JSON.stringify({
-//                         contents: [{
-//                             parts: [{
-//                                 text: question
-//                             }]
-//                         }]
-//                     })
-//                 }
-//             );
-            
-//             if (!response.ok) {
-//                 const errorData = await response.json();
-//                 throw new Error(errorData.error?.message || 'API request failed');
-//             }
-            
-//             const data = await response.json();
-//             answer = data.candidates[0].content.parts[0].text;
-            
-//         } else {
-//             // PRODUCTION: Use Netlify proxy
-//             console.log('📍 Calling via Netlify proxy (production mode)');
-            
-//             const response = await fetch(CONFIG.netlifyFunctionUrl, {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     question: question
-//                 })
-//             });
-            
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! status: ${response.status}`);
-//             }
-            
-//             const data = await response.json();
-            
-//             if (!data.success) {
-//                 throw new Error(data.error || 'Unknown error');
-//             }
-            
-//             answer = data.answer;
-//         }
-        
-//         // Add AI response to chat
-//         addChatMessage('AI response', answer, 'response-box');
-        
-//     } catch (error) {
-//         // Add error message to chat
-//         addChatMessage('AI response', `❌ Error: ${error.message}`, 'response-box');
-//         console.error('Error:', error);
-//     } finally {
-//         loading.classList.remove('active');
-//         sendBtn.disabled = false;
-//         chatHistory.scrollTop = chatHistory.scrollHeight;
-//     }
-// }
 
 // Helper function to add messages to chat
 function addChatMessage(label, text, boxClass) {

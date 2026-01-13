@@ -1,0 +1,63 @@
+Selamat datang! di seri ke-empat pembahasan bahasa pemrogaman Python. Sebelumnya, telah dikupas tuntas mengenai Python: Struktur Data pada seri ke-tiga. Alright, kembali ke pokok bahasan, Perulangan atau Looping digunakan untuk memproses suatu data secara iteratif berdasarkan banyaknya data. Pemrosesan tersebut bekerja berdasarkan pada perintah yang telah di-inisialisasi terlebih dahulu.
+
+**For — Loop**
+```
+# Bentuk for-loop
+for value in values:
+    perintah
+```
+
+Terdapat beberapa variasi dari penggunaan for — loop, yaitu:
+- looping untuk **satu kelompok data**, pada contoh ini tidak memerlukan bantuan dari function apapun, hanya memerlukan datanya saja.
+```
+for i in range(5):
+    print(i)
+
+>> output: 0
+           1
+           2
+           3
+           4
+```
+
+- looping untuk **dua kelompok data**, untuk contoh ini memerlukan bantuan function `zip(data_i, data_j)` untuk memanggil dua kelompok data.
+```
+for i, j in zip(range(5), range(5, 10)):
+    print(i, j)
+
+>> output: 0 5
+           1 6
+           2 7
+           3 8
+           4 9
+```
+
+- looping untuk **satu kelompok data** disertai memanggil nomor urut tiap data, di kondisi ini tidak perlu memberikan argumen mengenai penomoran dari tiap data, karena function enumerate() mampu memberikan penomoran tersebut secara otomatis.
+```
+nama_buah = ['pisang', 'mangga', 'jeruk', 'durian]
+for i, j in enumerate(nama_buah):
+    print(i, j)
+
+>> output: 0 pisang
+           1 mangga
+           2 jeruk
+           3 durian
+```
+
+**While — Loop**
+```
+# Bentuk while-loop
+while kondisi:
+    perintah
+```
+
+Terdapat beberapa variasi dari penggunaan while — loop, yaitu:
+- Pada **kondisi tertentu**, jika kondisi tercapai, maka proses komputasinya akan otomatis berhenti, contoh di bawah ini apabila nilai `i ≥ var` maka akan proses berhenti.
+![Image showing data](assets/programming-python-4-1.webp)
+
+- **Kondisi `True`** berarti looping forever, oleh karenanya diperlukan suatu statemen untuk menghentikan proses komputasinya, di sini menggunakan statemen brake untuk menghentikan prosesnya.
+![Image showing data](assets/programming-python-4-2.webp)
+
+<p style="text-align: center; font-size: 30px">...</p>
+
+Sekian, setelah pembahasan Looping pada Python, nanti akan dibahas pula mengenai Function pada seri ke-lima. Juga akan ada artikel bonus mengenai common functions & common methods. Nantikan! Cheers.

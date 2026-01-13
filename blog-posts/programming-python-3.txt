@@ -1,0 +1,241 @@
+Pada seri sebelumnya telah dibahas mengenai Tipe Data dan Input/Output, jika ada pertanyaan mengenai sintaks yang digunakan pada contoh di bawah nanti, silakan pelajari sintaksnya di Python: Tipe Data & I/O. Sekarang kita akan belajar mengenai konsep beserta contohnya dari Struktur Data.
+
+### Struktur Data
+Pada pengolahan data yang terdiri atas lebih dari satu nilai diperlukan suatu wadah untuk menampung data tersebut, inilah tugas dari Struktur Data. Secara umum, ada empat macam Struktur Data di dalam Python, yaitu: List, Tuple, Set, dan Dictionary. Tiap macamnya memiliki kegunaan masing-masing sesuai dengan permasalahan yang sedang ditangani. Berikut ini merupakan beberapa perbedaan dari setiap macamnya:
+![Image showing data](assets/programming-python-3-1.webp)
+*Perbedaan tipe struktur data*
+
+Langsung saja ke penjelasan dan contohnya, yuk!
+- **List** bersifat *mutable* karena data di dalamnya dapat diubah (ditambah atau dikurangi), dan juga bersifat *ordered* sehingga value yang ada di dalamnya bisa diakses melalui indeks.
+```
+# Menambahkan satu nilai
+var = [1, 2, 3, 4, 5]
+var.append(7)
+print(var)
+>> output: [1, 2, 3, 4, 5, 7]
+
+# Menambahkan beberapa nilai
+var = [1, 2, 3, 4, 5]
+var.extend([8, 9, 10])
+print(var)
+>> output: [1, 2, 3, 4, 5, 8, 9, 10]
+
+# Menambahkan satu nilai di indeks tertentu (cara 1)
+var = [1, 2, 3, 4, 5]
+var.insert(1, 7)
+print(var)
+>> output: [1, 7, 2, 3, 4, 5]
+
+# Menambahkan satu nilai di indeks tertentu (cara 2)
+var = [1, 2, 3, 4, 5]
+var[1] = 7
+print(var)
+>> output: [1, 7, 2, 3, 4, 5]
+```
+```
+# Menghapus satu nilai
+var = [1, 2, 3, 4, 5]
+var.remove(3)
+print(var)
+>> output: [1, 2, 4, 5]
+
+# Menghapus satu atau beberapa nilai berdasarkan indeks
+var = [1, 2, 3, 4, 5]
+del var[0:3]  # [0:3] -> merupakan singkatan dari 0,1,2 (nomor indeks dari nilai-nilai)
+print(var)
+>> output: [4, 5]
+
+# Menghapus satu nilai di indeks tertentu dan menyimpan nilai tersebut di dalam variabel
+var = [1, 2, 3, 4, 5]
+value_picked = var.pop(1)
+print(var)
+>> output: [1, 3, 4, 5]
+print(value_picked)
+>> output: 2
+
+# Menghapus seluruh nilai
+var = [1, 2, 3, 4, 5]
+var.clear()
+print(var)
+>> output: []
+```
+```
+# Menampilkan jumlah nilai
+nama_buah = ['mangga', 'jeruk', 'apel']
+jumlah_buah = len(nama_buah)
+print(jumlah_buah)
+>> output: 3
+
+# Menampilkan indeks nilai (posisi nilai) di dalam list
+nama_buah = ['mangga', 'jeruk', 'apel']
+indeks_buah = nama_buah.index('jeruk)
+print(indeks_buah)
+>> output: 1
+
+# Menghitung jumlah kemunculan suatu nilai
+nama_buah = ['mangga', 'jeruk', 'apel', 'apel']
+jumlah_kemunculan_buah = nama_buah.count('apel)
+print(jumlah_kemunculan_buah)
+>> output: 2
+
+# Mengurutkan nilai berdasarkan abjad
+nama_buah = ['mangga', 'jeruk', 'apel']
+nama_buah_sorted = nama_buah.sort()
+print(nama_buah_sorted)
+>> output: ['apel', 'jeruk', 'mangga']
+```
+- **Tuple** pada dasarnya mirip dengan List, yang membedakannya adalah sifat immutable yang dimiliki oleh Tuple, yaitu: data/value di dalamnya tidak dapat dapat diubah. Akan tetapi, data di dalam Tuple masih dapat diakses melalui indeks karena sifat lainnya, yaitu: ordered data.
+    
+    Jika dibandingkan secara komputasi Tuple lebih cepat daripada List, meski dalam kenyataannya tidak terlalu terasa lebih cepat yang mana. Namun, Tuple dapat melindungi data dari ketidaksengajaan modifikasi karena isinya tidak dapat diubah.
+```
+# Menampilkan indeks nilai (posisi nilai) di dalam list
+nama_buah = ('mangga', 'jeruk', 'apel', 'apel')
+indeks_buah = nama_buah.index('apel)
+print(indeks_buah)  # indeks yang muncul hanya untuk nilai pertama, apabila ada duplikat
+>> output: 2
+
+# Menghitung jumlah kemunculan nilai
+nama_buah = ('mangga', 'jeruk', 'apel', 'apel')
+jumlah_kemunculan_buah = nama_buah.count('apel)
+print(jumlah_kemunculan_buah)
+>> output: 2
+```
+
+- **Set** dapat bersifat mutable maupun immutable tergantung jenis Set mana yang digunakan. Set yang bersifat mutable dicirikan pada saat pendeklarasiannya, yaitu: menggunakan simbol {value} secara langsung atau menggunakan function set(value)
+
+    Sedangkan Set yang bersifat immutable dicirikan dengan penggunaan function `frozenset(value)` pada saat pendeklarasiannya
+
+    Kedua jenis Set di atas bersifat unique sehingga jika ada data baru yang bernilai sama dengan data lama, maka secara otomatis data tersebut tidak akan tercatat. Set juga bersifat unordered sehingga datanya tidak bisa diakses melalui indeks.
+```
+# Mutable Set
+nama_buah = {'mangga', 'jeruk', 'apel'}
+print(nama_buah)
+>> output: {'mangga', 'jeruk', 'apel'}
+
+# Immutable Set
+nama_buah = frozenset({'mangga', 'jeruk', 'apel'})
+print(nama_buah)
+>> output: frozenset({'mangga', 'jeruk', 'apel'})
+```
+```
+# Menambahkan satu nilai
+nama_buah = {'mangga', 'jeruk', 'apel'}
+nama_buah.add('pisang')
+print(nama_buah)  # note: posisi kata 'pisang' bisa berubah secara acak, karena Set tidak mengenal indeks
+>> output: {'mangga', 'jeruk', 'apel', 'pisang'}
+
+# Menambahkan beberapa nilai
+nama_buah = {'mangga', 'jeruk', 'apel'}
+nama_buah.update(['pisang', 'apel'])
+print(nama_buah)  # note: kata 'apel' yang muncul hanya satu meski sudah ditambah lagi, hal ini disebabkan oleh sifat Set yang secara otomatis menghapus nilai duplikat (deduplicate)
+>> output: {'mangga', 'jeruk', 'apel', 'pisang'}
+```
+```
+# Menghapus satu nilai (cara 1)
+nama_buah = {'mangga', 'jeruk', 'apel'}
+nama_buah.remove('apel')
+print(nama_buah)
+>> output: {'mangga', 'jeruk'}
+
+# Menghapus satu nilai (cara 2)
+nama_buah = {'mangga', 'jeruk', 'apel'}
+nama_buah.discard('apel')  # method ini tidak akan memunculkan error apabila nilai yang dihapus memang tidak ada di dalam Set, coba saja dengan nama buah yang lain
+print(nama_buah)
+>> output: {'mangga', 'jeruk'}
+
+# Menghapus seluruh nilai
+nama_buah = {'mangga', 'jeruk', 'apel'}
+nama_buah.clear()
+print(nama_buah)
+>> output: set()
+```
+
+- **Dictionary** bersifat mutable karena data di dalamnya dapat diubah. Struktur data jenis ini biasanya direpresentasikan sebagai data tabular atau tabel, seperti yang ada di Microsoft Excel. Jadi, key sebagai nama kolomnya, lalu values sebagai datanya.
+
+    Karena sifatnya unordered, maka key dapat dianggap sebagai indeks yang dibuat sendiri oleh user.
+    
+    Serta, apabila terdapat dua atau lebih nama key yang sama, maka hanya akan disimpan salah satunya saja.
+
+    Selain contoh operasi di atas, kita juga dapat menampilkan daftar key dan value pada Dictionary yang telah dibuat.
+```
+# Menambahkan satu nilai (pasangan key:value)
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+keranjang_buah['pisang'] = 5
+print(keranjang_buah)
+>> output: {'mangga': 10, 'jeruk': 2, 'apel': 7, 'pisang': 5}
+
+# Menambahkan beberapa nilai
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+keranjang_buah.update({'pisang': 5, 'durian': 12})
+print(keranjang_buah)
+>> output: {'mangga': 10, 'jeruk': 2, 'apel': 7, 'pisang': 5, 'durian': 12}
+
+# Mengubah value berdasarkan key
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+keranjang_buah['mangga'] = 5
+print(keranjang_buah)
+>> output: {'mangga': 5, 'jeruk': 2, 'apel': 7}
+```
+```
+# Menghapus nilai
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+value = keranjang_buah.pop('mangga')
+print(keranjang_buah)
+>> output: {'jeruk': 2, 'apel': 7}
+print(value)
+>> 10
+
+# Menghapus seluruh nilai
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+keranjang_buah.clear()
+print(keranjang_buah)
+>> output: {}
+```
+```
+# Mengambil value berdasarkan key (cara 1)
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+value = keranjang_buah['mangga']
+print(value)
+>> output: 10
+
+# Mengambil value berdasarkan key (cara 2)
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+value = keranjang_buah.get('mangga')  # method ini tidak akan memunculkan error apabila key yang direferensikan memang tidak ada di dalam Dict, coba saja dengan nama buah yang lain
+print(value)
+>> output: 10
+
+# Menampilkan daftar key
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+daftar_key = keranjang_buah.keys()
+print(daftar_key)
+>> output: dict_keys(['mangga', 'jeruk', 'apel'])
+
+# Menampilkan daftar values
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+daftar_key = keranjang_buah.keys()
+print(daftar_key)
+>> output: dict_keys([10, 2, 7])
+
+# Mengubah nama key
+keranjang_buah = {'mangga': 10, 'jeruk': 2, 'apel': 7}
+keranjang_buah['mango'] = keranjang_buah.pop('mangga')  # 'mango' adalah nama key yang baru, sedangkan 'mangga' adalah nama key yang lama
+print(keranjang_buah)
+>> output: {'jeruk': 2, 'apel': 7, 'mango': 10}
+
+# Kasus beberapa key bernama sama
+keranjang_buah = {'mangga': 10, 'mangga': 2, 'mangga': 7}  # jika nama key sama, hanya akan diambil nilai yang posisinya terakhir
+print(keranjang_buah)
+>> output: {'mangga': 7}
+```
+
+<p style="text-align: center; font-size: 30px">...</p>
+
+Mungkin akan muncul pertanyaan di pikiran Pythoneers semua, kan ada empat macam struktur data, terus kapan harus pakai yang mana?
+
+Perihal harus pakai yang mana tergantung dengan kebutuhan atau kasus yang sedang ditangani, kalau hanya ingin menyimpan sekelompok data dan kita bisa ubah isinya, gunakan saja **List**.
+
+Atau ketika ingin menyaring suatu kelompok data agar datanya unique, Pythoneers bisa pilih **Set**. Lalu, ketika ingin mengakses suatu nilai berdasarkan nama sesuatu, misal: ingin mengakses urutan hari berdasarkan nama harinya, di kasus ini bisa menggunakan **Dictionary**.
+
+Sekian, itulah beberapa macam Struktur Data pada Python beserta contoh penggunaannya. Untuk seri ke-empat akan dibahas mengenai Perulangan atau Looping. Cheers.
+
+Terima kasih!

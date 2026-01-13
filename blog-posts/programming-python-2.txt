@@ -1,0 +1,158 @@
+Setelah mempelajari mengenai Python: Variabel & Operasi beserta contoh implementasinya pada seri yang pertama, yuk! lanjut pahami konsep Tipe Data dan Input/Output (I/O).
+
+### Tipe Data
+Setiap nilai atau data tentu memiliki tipenya masing-masing, dengan adanya pemahaman mengenai tipe data, Pythoneer dapat mengambil keputusan terhadap langkah yang perlu diambil dalam mengolah data tersebut.
+Adapun 4 tipe data dalam Python, yaitu:
+- **String** (str) merepresentasikan karakter apapun (huruf, angka, karakter khusus) yang posisinya diapit oleh tanda petik tunggal (‘) atau petik ganda (“). Karena Python menganggap kedua simbol tersebut sama sehingga pemilihannya bergantung pada preferensi Pythoneer, dan yang wajib ditaati adalah penggunaannya harus konsisten.
+Seperti contoh di bawah ini:
+```
+var = 'Prospek cerah pemrogaman Python di 2021!'
+var2 = "Prospek cerah pemrogaman Python di 2021!"
+```
+- **Integer** (int) merupakan tipe data dari bilangan bulat, contoh:
+```
+var = 20
+```
+- **Float** (float) merupakan tipe data dari bilangan pecahan, contoh:
+```
+var = 20.5
+```
+- **Boolean** (bool) merupakan tipe data logika (`True` atau `False`), contoh:
+```
+var = (10 == 10)
+print(var)
+>> output: True
+
+var2 = (10 != 10)
+print(var2)
+>> output: False
+```
+
+Tipe dari suatu data juga dapat dikonversi menjadi tipe tertentu. Caranya relatif mudah, karena hanya perlu memanggil salah satu function built-in yang tersedia sesuai dengan kebutuhan Pythoneer, dan argumen nilai’ di dalam kurungnya dapat diisi dengan data yang ingin diubah tipenya. Function-function tersebut antara lain:
+- `str(nilai)` untuk mengubah tipe data menjadi string
+- `int(nilai)` untuk mengubah tipe data menjadi integer
+- `float(nilai)` untuk mengubah tipe data menjadi float
+
+Contoh implementasi:
+```
+# String to Integer
+var = '10'
+print("tipe data 'var' adalah:, type(var)")
+>> output: tipe data 'var' adalah: 'str'
+
+var2 = int(var)
+print("tipe data 'var2' adalah:, type(var2)")
+>> output: tipe data 'var2' adalah: 'int'
+```
+```
+# Integer to String
+var = 10
+print("tipe data 'var' adalah:, type(var)")
+>> output: tipe data 'var' adalah: 'int'
+
+var2 = str(var)
+print("tipe data 'var2' adalah:, type(var2)")
+>> output: tipe data 'var2' adalah: 'str'
+```
+```
+# Integer to Float
+var = 10
+print("tipe data 'var' adalah:, type(var)")
+>> output: tipe data 'var' adalah: 'int'
+
+var2 = float(var)
+print("tipe data 'var2' adalah:, type(var2)")
+>> output: tipe data 'var2' adalah: 'float'
+```
+
+Sebenarnya ada satu function lagi yang berhubungan dengan tipe data, yaitu: `bool(nilai)` yang tugasnya hanya mengembalikan nilai `True` jika argumen yang dimasukkan ada datanya dan `False` jika argumen yang dimasukkan tidak ada datanya. Contohnya seperti ini:
+
+Selain argumen yang bernilai 0 (nol), function `bool()` juga memberikan keluaran `False` jika argumen yang dimasukkan merupakan salah satu dari contoh berikut ini: `[]`, `()`, `{}`, `False`, `None`
+
+---
+
+### Input/Output
+Setiap program yang dijalankan memerlukan masukkan (input), serta keluaran (output) yang berfungsi untuk menunjukkan hasil dari suatu proses pada program. Berikut penggunaannya pada Python:
+- **Input**, digunakan untuk memasukkan nilai tertentu, sehingga program yang dibuat dapat secara dinamis mengolah data masukan. Sintaks yang digunakan adalah function input() yang mana tipe data dari masukan tersebut berupa string. Sehingga, jika proses yang dilakukan pada program berupa perhitungan/kalkulasi, Pythoneer perlu mengkonversi terlebih dahulu tipe datanya menjadi integer atau float.
+```
+var = input('Masukkan nama Anda: ')
+print("Nama Anda adalah", var)
+>> input: Beni
+>> output: Nama Anda adalah Beni
+```
+
+- **Output**, digunakan untuk menunjukkan nilai hasil pengolahan. Sintaks yang digunakan adalah functionprint() dan terdapat beberapa variasi untuk menampilkan suatu keluaran, yaitu:
+    * Memasukkan variabel secara langsung
+    ```
+    var = "Indonesia"
+    print("Saya lahir di", var)
+    >> output: Saya lahir di Indonesia
+
+    var2 = 1945
+    print("Saya lahir di", var, "pada tahun", var2)
+    >> output: Saya lahir di Indonesia pada tahun 1945
+    ```
+    * Menggunakan method .format()
+    ```
+    var  = "Indonesia"
+    var2 = 1945
+
+    # Metode 1
+    print("Saya lahir di {}".format(var))
+    print("Saya lahir di {} pada tahun {}".format(var, var2))
+    >> output: Saya lahir di Indonesia
+    >> output: Saya lahir di Indonesia pada tahun 1945
+
+    # Metode 2
+    print(f"Saya lahir di {var}")
+    print(f"Saya lahir di {var} pada tahun {var2}")
+    >> output: Saya lahir di Indonesia
+    >> output: Saya lahir di Indonesia pada tahun 1945    
+    ```
+    * Menggunakan sintaks %()
+    ```
+    # Metode 1: %s untuk string
+    var = "Indonesia"
+    print("Saya lahir di %s" %(var))
+    >> output: Saya lahir di Indonesia
+
+    # Metode 2: %d untuk integer
+    var = 10
+    print("Saya makan %d buah nanas" %(var))
+    >> output: Saya makan 10 buah nanas
+
+    # Metode 3: %f untuk float
+    var = 10/3
+    print("Hasil dari 10/3 adalah %f" %(var))
+    print("Hasil dari 10/3 adalah %.3f" %(var))
+    >> output: Hasil dari 10/3 adalah 3.333333
+    >> output: Hasil dari 10/3 adalah 3.333
+    ```
+
+Sebagai bonus, ada juga istilah yang namanya *escape character*, ini dia contohnya:
+Kegunaan dari *escape character* adalah untuk memperjelas interpretasi dari hasil pengolahan, sehingga keluaran yang diperoleh dapat dipahami dengan lebih mudah. Akan tetapi, hal ini tidak harus selalu digunakan. Gunkanlah seperlunya saja.
+```
+# \n -> memindahkan string di sebelah kanan ke baris berikutnya
+print("Ada dua warna di bendera negara Indonesia:\nMerah dan Putih")
+>> output: Ada dua warna di bendera negara Indonesia:
+           Merah dan Putih
+
+# \t -> menambahkan whitespace sejauh satu tab
+print("Geser sejauh \t 1 tab")
+>> output: Geser sejauh      1 tab
+
+# \b -> menghapus satu spasi (backspace)
+print("Indo \bnesia")
+>> output: Indonesia
+
+# \' atau \" -> memberikan tanda petik pada kondisi tertentu
+print('It'\s your shirt')
+print("Hewan pemakan daging disebut dengan \"Karnivora\"")
+>> output: Hewan pemakan daging disebut dengan "Karnivora"
+```
+
+<p style="text-align: center; font-size: 30px">...</p>
+
+Sekian, beberapa hal penting yang perlu dipahami bagi para Pythoneer garis keras. Seri berikutnya akan membahas mengenai Struktur Data, hal lain pada Python yang penting untuk dipahami. Cheers.
+
+Terima kasih!

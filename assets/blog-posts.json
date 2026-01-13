@@ -1,75 +1,52 @@
 [
     {
         "id": 1,
-        "category": "python-programming",
-        "title": "Variabel & Operasi",
-        "summary": "This is a summary...",
-        "contentFile": "post1.txt",
+        "category": "programming",
+        "title": "Python: Variabel & Operasi",
+        "summary": "Pengenalan variabel, aturan penamaan, serta operasi aritmatika, perbandingan, dan bitwise.",
+        "contentFile": "programming-python-1.txt",
         "date": "2021-02-03",
         "readingTime": 4,
-        "image": "assets/python-programming 1.webp"
+        "image": "assets/programming-python-1.webp"
     },
     {
         "id": 2,
-        "category": "python-programming",
-        "title": "Second Blog Post in Category A",
-        "summary": "This is a summary of the second blog post in category A",
-        "contentFile": "post2.txt",
-        "date": "2024-01-10",
-        "readingTime": 5
+        "category": "programming",
+        "title": "Python: Tipe Data & I/O",
+        "summary": "Pengenalan tipe data, konversi data, serta konsep dasar input dan output program.",
+        "contentFile": "programming-python-2.txt",
+        "date": "2021-02-04",
+        "readingTime": 4,
+        "image": "assets/programming-python-2.webp"
     },
     {
         "id": 3,
-        "category": "A",
-        "title": "Third Blog Post in Category A",
-        "summary": "This is a summary of the third blog post in category A",
-        "contentFile": "post3.txt",
-        "date": "2024-01-05",
-        "readingTime": 5
+        "category": "programming",
+        "title": "Python: Struktur Data",
+        "summary": "Pengenalan struktur data: List, Tuple, Set, dan Dictionary beserta fungsi dan penggunaannya.",
+        "contentFile": "programming-python-3.txt",
+        "date": "2021-02-11",
+        "readingTime": 4,
+        "image": "assets/programming-python-3.webp"
     },
     {
         "id": 4,
-        "category": "A",
-        "title": "Fourth Blog Post in Category A",
-        "summary": "This is a summary of the fourth blog post in category A",
-        "contentFile": "post4.txt",
-        "date": "2024-01-01",
-        "readingTime": 5
+        "category": "programming",
+        "title": "Python: Perulangan — Looping",
+        "summary": "Pengenalan perulangan menggunakan for loop dan while loop untuk memproses data secara iteratif.",
+        "contentFile": "programming-python-4.txt",
+        "date": "2021-02-15",
+        "readingTime": 2,
+        "image": "assets/programming-python-4.webp"
     },
     {
         "id": 5,
-        "category": "B",
-        "title": "First Blog Post in Category B",
-        "summary": "This is a summary of the first blog post in category B",
-        "contentFile": "post5.txt",
-        "date": "2024-01-20",
-        "readingTime": 5
-    },
-    {
-        "id": 6,
-        "category": "B",
-        "title": "Second Blog Post in Category B",
-        "summary": "This is a summary of the second blog post in category B",
-        "contentFile": "post6.txt",
-        "date": "2024-01-18",
-        "readingTime": 5
-    },
-    {
-        "id": 7,
-        "category": "B",
-        "title": "Third Blog Post in Category B",
-        "summary": "This is a summary of the third blog post in category B",
-        "contentFile": "post7.txt",
-        "date": "2024-01-12",
-        "readingTime": 5
-    },
-    {
-        "id": 8,
-        "category": "B",
-        "title": "Fourth Blog Post in Category B",
-        "summary": "This is a summary of the fourth blog post in category B",
-        "contentFile": "post8.txt",
-        "date": "2024-01-08",
-        "readingTime": 5
+        "category": "programming",
+        "title": "Python: Function & Anonymous Function",
+        "summary": "a summary.",
+        "contentFile": "programming-python-5.txt",
+        "date": "2021-02-18",
+        "readingTime": 3,
+        "image": "assets/programming-python-5.webp"
     }
 ]

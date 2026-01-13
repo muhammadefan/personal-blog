@@ -1,8 +1,62 @@
-[build]
-  functions = "netlify/functions"
-  publish = "."
+# Netlify configuration file
+# Place this in your project root
 
+[build]
+  # Build command (if you have any build process, otherwise leave empty)
+  command = ""
+  
+  # Publish directory - where your site files are
+  publish = "."
+  
+  # Functions directory
+  functions = "netlify/functions"
+
+[build.environment]
+  # Node version (optional, but recommended)
+  NODE_VERSION = "18"
+
+# Redirect rules (optional - for SPA routing if needed)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false
+  
+  # Don't redirect these
+  conditions = {Role = ["public"]}
+
+# Headers for CORS and security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # CORS headers (handled in function, but good to have)
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+    
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    
+# Cache control for static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Don't cache the embeddings file (it might update)
+[[headers]]
+  for = "/embeddings.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

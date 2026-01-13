@@ -1,0 +1,1 @@
+Pada kondisi tertentu, terutama ketika membuat program yang kompleks, diperlukan suatu blok kode yang dapat diakses berkali-kali. Hal ini bertujuan untuk mempermudah dalam me-maintenance program yang dibuat. Pada kondisi seperti ini Function adalah solusinya. Function merupakan blok kode yang berisi proses kerja atau alur dari suatu program.

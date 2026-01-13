@@ -2,5 +2,6 @@
 .env*
 config.local.js
 generate-embeddings.html
+test.html
 private-docs/
 private-documents.json
