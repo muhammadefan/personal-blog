@@ -3,7 +3,8 @@
 
 [build]
   # Build command (if you have any build process, otherwise leave empty)
-  command = ""
+  # command = ""
+  command = "echo 'Building static site...' && ls -la && echo 'HTML files:' && find . -name '*.html' | head -10"
   
   # Publish directory - where your site files are
   publish = "."
@@ -11,19 +12,37 @@
   # Functions directory
   functions = "netlify/functions"
 
+# Disable any processing that might hide files
+[build.processing]
+  skip_processing = true
+
 [build.environment]
   # Node version (optional, but recommended)
   NODE_VERSION = "18"
+  NETLIFY_USE_YARN = "false"
+
+# Context-specific settings
+[context.production]
+  command = ""
+  publish = "."
+
+[context.deploy-preview]
+  command = ""
+  publish = "."
+
+[context.branch-deploy]
+  command = ""
+  publish = "."
 
 # Redirect rules (optional - for SPA routing if needed)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
+  # force = false
   
   # Don't redirect these
-  conditions = {Role = ["public"]}
+  # conditions = {Role = ["public"]}
 
 # Headers for CORS and security
 [[headers]]
@@ -37,7 +56,7 @@
     # Security headers
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer"
+    # Referrer-Policy = "no-referrer"
     
 # Cache control for static assets
 [[headers]]
