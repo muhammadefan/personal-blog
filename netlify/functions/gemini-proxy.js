@@ -2,23 +2,16 @@
 // This keeps API key secure on the server
 
 exports.handler = async (event, context) => {
-  // Only allow POST requests
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
-  }
-
-  // Enable CORS
+  // Enable CORS FIRST
   const headers = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'https://muhammadefan.github.io',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS, GET',
+    'Access-Control-Allow-Credentials': 'true',
     'Content-Type': 'application/json'
   };
 
-  // Handle preflight requests
+  // Handle preflight OPTIONS request
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -27,8 +20,35 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Only allow POST requests for actual API calls
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ 
+        success: false, 
+        error: 'Method not allowed. Use POST.' 
+      })
+    };
+  }
+
   try {
-    const { action, question, query } = JSON.parse(event.body);
+    // Parse the request body
+    let requestData;
+    try {
+      requestData = JSON.parse(event.body);
+    } catch (parseError) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ 
+          success: false, 
+          error: 'Invalid JSON in request body' 
+        })
+      };
+    }
+    
+    const { action, question, query, prompt } = requestData;
     
     // Get API key from environment variable
     const apiKey = process.env.GEMINI_API_KEY;
@@ -61,7 +81,15 @@ exports.handler = async (event, context) => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'Embedding API failed');
+        console.error('Embedding API error:', errorData);
+        return {
+          statusCode: response.status,
+          headers,
+          body: JSON.stringify({
+            success: false,
+            error: errorData.error?.message || 'Embedding API failed'
+          })
+        };
       }
 
       const data = await response.json();
@@ -77,8 +105,6 @@ exports.handler = async (event, context) => {
 
     } else if (action === 'generate') {
       // Generate answer with context
-      const { prompt } = JSON.parse(event.body);
-      
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
         {
@@ -94,11 +120,19 @@ exports.handler = async (event, context) => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'Generation API failed');
+        console.error('Generation API error:', errorData);
+        return {
+          statusCode: response.status,
+          headers,
+          body: JSON.stringify({
+            success: false,
+            error: errorData.error?.message || 'Generation API failed'
+          })
+        };
       }
 
       const data = await response.json();
-      const answer = data.candidates[0].content.parts[0].text;
+      const answer = data.candidates[0]?.content?.parts[0]?.text || 'No response from AI';
 
       return {
         statusCode: 200,
@@ -127,7 +161,7 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         success: false,
-        error: error.message
+        error: error.message || 'Internal server error'
       })
     };
   }

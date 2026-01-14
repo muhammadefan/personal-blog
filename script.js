@@ -783,7 +783,7 @@ async function loadDocumentContent(docId, docType) {
     }
 }
 
-// MODIFIED sendQuestion function with RAG
+// sendQuestion function with RAG
 async function sendQuestion() {
     const input = document.getElementById('questionInput');
     const question = input.value.trim();
@@ -824,7 +824,7 @@ async function sendQuestion() {
             let context = '';
             
             if (isEmbeddingsLoaded) {
-                console.log('🤖 Using RAG (Retrieval-Augmented Generation)');
+                console.log('Using RAG (Retrieval-Augmented Generation)');
                 
                 // Direct embedding call (local)
                 const embedResponse = await fetch(
