@@ -2,7 +2,7 @@ Pada seri sebelumnya telah dibahas mengenai Tipe Data dan Input/Output, jika ada
 
 ### Struktur Data
 Pada pengolahan data yang terdiri atas lebih dari satu nilai diperlukan suatu wadah untuk menampung data tersebut, inilah tugas dari Struktur Data. Secara umum, ada empat macam Struktur Data di dalam Python, yaitu: List, Tuple, Set, dan Dictionary. Tiap macamnya memiliki kegunaan masing-masing sesuai dengan permasalahan yang sedang ditangani. Berikut ini merupakan beberapa perbedaan dari setiap macamnya:
-![Image showing data](assets/programming-python-3-1.webp)
+![Image showing data](assets/blog-posts-img/programming-python-3-1.webp)
 *Perbedaan tipe struktur data*
 
 Langsung saja ke penjelasan dan contohnya, yuk!

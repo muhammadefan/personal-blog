@@ -1001,7 +1001,7 @@ ${question}`;
             }
             
             // Call Netlify function for generation
-            const response = await fetch('/.netlify/functions/gemini-rag', {
+            const response = await fetch('/.netlify/functions/gemini-proxy', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -1,1 +1,127 @@
 Pada kondisi tertentu, terutama ketika membuat program yang kompleks, diperlukan suatu blok kode yang dapat diakses berkali-kali. Hal ini bertujuan untuk mempermudah dalam me-maintenance program yang dibuat. Pada kondisi seperti ini Function adalah solusinya. Function merupakan blok kode yang berisi proses kerja atau alur dari suatu program.
+
+Ada beberapa variasi dari Function berdasarkan pada penggunaannya, dan Function hanya akan bekerja sesudah didefinisikan kemudian dipanggil.
+Ini contoh variasinya:
+
+#### Function — dengan sintaks: `def`
+- **Function `def` bentuk dasar** dicirikan dengan format seperti berikut ini:
+```
+# Mendefinisikan function
+def nama_function():
+    penjumlahan = 1 + 1
+    print(penjumlahan)
+
+# Memanggil function
+nama_function()
+
+>> output: 2
+```
+
+- **Function `def` dengan argumen** yang biasanya digunakan apabila terdapat suatu nilai sebagai masukannya, dan argumen yang digunakan bisa lebih dari satu. Function bentuk ini dicirikan seperti berikut:
+```
+# Mendefinisikan function
+def nama_function(parameter):
+    penjumlahan = parameter + parameter
+    print(penjumlahan)
+
+# Memanggil function
+nama_function(2)
+
+>> output: 4
+```
+
+- **Function `def` dengan keyword `return`** yang dapat mengembalikan nilai dari variabel lokal tertentu yang dapat digunakan jika diperlukan.
+    Kunjungi Python: Variabel & Operasi untuk memahami perbedaan antara variabel lokal dengan variabel global.
+```
+# Mendefinisikan function
+def volume_persegi(sisi):
+    luas = sisi * sisi
+    volume = luas * sisi
+    return volume
+
+# Memanggil function
+v = volume_persegi(3)
+print(v)
+
+>> output: 27
+```
+
+Berikut merupakan contoh dari function dengan keyword `return`:
+dalam pengaplikasian Function juga terdapat beberapa aturan yang harus dipenuhi agar tidak terjadi error, misal:
+
+- Argumen NON-DEFAULT harus didefinisikan sebelum argumen DEFAULT, contohnya seperti berikut ini:
+    
+    `r` merupakan argumen NON-DEFAULT dan `phi` merupakan argumen DEFAULT karena sudah diberi nilai saat pendeklarasian Function. Oleh karena itu, pengisian nilai pada argumen `phi` menjadi opsional.
+
+```
+# Mendefinisikan function
+def keliling_lingkaran(r, phi=3.14):
+    k = 2 * phi * r
+    return k
+
+# Memanggil function
+k = keliling_lingkaran(5)
+print(k)
+
+>> output: 31.4
+```
+---
+
+#### Function — dengan sintaks: `lambda`
+Function jenis ini umumnya disebut dengan *Anonymous Function*, dinamai demikian karena pada strukturnya tidak memerlukan nama_function seperti contoh-contoh sebelumnya. Selain itu, Anonymous/Lambda Function hanya terdiri atas satu baris kode.
+
+Terus, bagaimana cara manggilnya kalau tidak punya nama? Tenang. Pythoneers bisa membuat variabel untuk menampung operasi atau perintah yang dilakukan. Seperti berikut ini:
+```
+# Bentuk dasar -> lambda parameter: perintah
+
+# Mendefinisikan function
+var = lambda parameter: parameter + parameter
+
+# Memanggil function
+output = var(5)
+print(output)
+
+>> output: 10
+```
+
+Selain dengan cara seperti di atas, Lambda Function juga bisa dieksekusi dengan cara memanggil langsung nilai yang ingin diolah. Misalkan:
+```
+# Mengeksekusi function
+print( (lambda parameter: parameter + parameter)(5) )
+
+>> output: 10
+```
+
+Mungkin ada yang bertanya-tanya
+**kapan sih perlu pakai Lambda Function?**
+
+Penggunaan Lambda Function hanya diperlukan pada kondisi tertentu saja yang cukup dengan satu baris kode. Contohnya ketika menggunakan Function *built-in* atau bawaan milik Python: `filter()` maupun `map()` yang memerlukan parameter berupa Function lain. Ini contohnya:
+```
+# filter() -> menyaring data berdasarkan kondisi tertentu
+
+# Kasus bilangan genap
+var = list(range(1, 10))  # isi data: [1,2,3,4,5,6,7,8,9]
+
+output = list(filter(lambda x: x%2 == 0, var))  # struktur -> filter(function, data)
+print(output)
+
+>> output: [2, 4, 6, 8]
+```
+
+Contoh di atas menggunakan operasi modulo, jika belum familiar, silakan bisa kenalan di Python: Variabel & Operasi.
+```
+# map() -> memanggil nilai satu persatu, lalu diolah sesuai perintah
+
+# Kasus menjumlahkan setiap nilai dengan angka 1
+var = list(range(1, 10))  # isi data: [1,2,3,4,5,6,7,8,9]
+
+output = list(map(lambda x: x + 1, var))  # struktur -> map(function, data)
+print(output)
+
+>> output: [2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+<p style="text-align: center; font-size: 30px">...</p>
+
+Sekian, seri berikutnya akan dibahas mengenai Percabangan atau yang umumnya dikenal sebagai if-else. Cheers.
+Terima kasih!

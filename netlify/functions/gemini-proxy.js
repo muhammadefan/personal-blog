@@ -1,5 +1,5 @@
 // Netlify serverless function to proxy Gemini API calls
-// This keeps your API key secure on the server
+// This keeps API key secure on the server
 
 exports.handler = async (event, context) => {
   // Only allow POST requests
