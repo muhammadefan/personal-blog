@@ -1,0 +1,3 @@
+1. **Data format:** Daily network traffic data stored in a relational database management system (RDBMS), aggregated into year–month granularity for modeling and reporting.
+2. **Forecasting:** Applied a regression-based forecasting approach combined with convex optimization to capture long-term trends and seasonal patterns, including major events such as New Year holidays and Eid al-Fitr.
+3. **Output:** Generated forecasts in year–month format and persisted them back to the RDBMS for downstream consumption by monitoring and visualization dashboards.

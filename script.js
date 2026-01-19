@@ -365,7 +365,7 @@ document.getElementById('blogModal').addEventListener('click', (e) => {
 // Filter Portfolio
 let currentPortfolioFilter = 'all';
 function filterPortfolio(category) {
-    currentPortfolioFilter = category;
+    currentPortfolioFilter = category; // .toLowerCase();
     
     // Update active button
     document.querySelectorAll('.category-filter-btn').forEach(btn => {
@@ -390,7 +390,7 @@ function renderPortfolioProjects() {
         : portfolio.filter(p => p.category === currentPortfolioFilter);
     
     filteredProjects.forEach((project, index) => {
-        const categoryClass = `category-${project.category.toLowerCase()}-label`;
+        const categoryClass = `category-${project.category.toLowerCase().replace(/[\/ ]/g, "-")}-label`;
         const projectItem = document.createElement('div');
         projectItem.className = 'project-item';
         
@@ -427,14 +427,29 @@ async function openProjectModal(projectId) {
         // Define sections with their config
         const sections = [
             { 
+                key: 'overview', 
+                title: 'Overview',
+                fallbackKey: 'overviewFile' // For backward compatibility
+            },
+            {
+                key: 'responsibilities',
+                title: 'Responsibilities',
+                fallbackKey: 'responsibilitiesFile'
+            },
+            { 
                 key: 'goals', 
                 title: 'Goals',
-                fallbackKey: 'goalsFile' // For backward compatibility
+                fallbackKey: 'goalsFile'
             },
             { 
                 key: 'methods', 
                 title: 'Methods',
                 fallbackKey: 'methodsFile'
+            },
+            { 
+                key: 'impacts', 
+                title: 'Impacts',
+                fallbackKey: 'impactsFile'
             },
             { 
                 key: 'painPoints', 
@@ -445,12 +460,13 @@ async function openProjectModal(projectId) {
                 key: 'improvements', 
                 title: 'Future Improvements',
                 fallbackKey: 'improvementsFile'
-            },
-            { 
-                key: 'impact', 
-                title: 'Impact',
-                fallbackKey: 'impactFile'
             }
+            // ,
+            // {
+            //     key: 'timeline',
+            //     title: 'Timeline',
+            //     fallbackKey: 'timelineFile'
+            // }
         ];
         
         // Process each section
@@ -889,9 +905,8 @@ async function sendQuestion() {
 IMPORTANT INSTRUCTIONS:
 - Answer based ONLY on the information in the provided documents
 - If the answer is not in the documents, politely say you don't have that information in the knowledge base
-- Be conversational and helpful
+- Be conversational and helpful, and answer with friendly tone
 - Keep your answer concise but complete
-- If you reference information, mention which document it came from
 
 Documents from the website:
 ${context}
@@ -984,9 +999,8 @@ ${question}`;
 IMPORTANT INSTRUCTIONS:
 - Answer based ONLY on the information in the provided documents
 - If the answer is not in the documents, politely say you don't have that information in the knowledge base
-- Be conversational and helpful
+- Be conversational and helpful, and answer with friendly tone
 - Keep your answer concise but complete
-- If you reference information, mention which document it came from
 
 Documents from the website:
 ${context}
@@ -1024,12 +1038,12 @@ ${question}`;
             
             // Add AI response with sources
             let messageText = answer;
-            if (relevantDocs.length > 0) {
-                const sources = relevantDocs.map(doc => 
-                    `${doc.type === 'blog' ? '📄' : '🔒'} ${doc.title}`
-                ).join(', ');
-                messageText += `\n\n**Sources used:** ${sources}`;
-            }
+            // if (relevantDocs.length > 0) {
+            //     const sources = relevantDocs.map(doc => 
+            //         `${doc.type === 'blog' ? '📄' : '🔒'} ${doc.title}`
+            //     ).join(', ');
+            //     messageText += `\n\n**Sources used:** ${sources}`;
+            // }
             
             addChatMessage('AI response', messageText, 'response-box');
         }

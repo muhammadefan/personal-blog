@@ -1,0 +1,3 @@
+Developed an AI-powered service to enhance the electronic Know Your Customer (e-KYC) process by automatically extracting customer information from official documents, including KTP (Indonesian Identity Card), SIM (Indonesian Driving License), Passport, NPWP (Indonesian Tax ID), and SK Pensiun (Retirement Certificate).
+
+The system performs intelligent typo correction for location-related fields—ranging from province names down to sub-districts—ensuring data consistency and reliability. The service is served using FastAPI, then packaged as a Docker image and deployed on AWS Elastic Kubernetes Service (EKS) for scalability and production readiness.

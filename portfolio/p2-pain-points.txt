@@ -1,0 +1,3 @@
+1. Publicly available datasets for Indonesian official documents are limited, requiring extensive in-house data preparation, which was time-consuming but critical for model performance.
+2. Deploying GPU-enabled infrastructure significantly improved OCR performance, delivering a 3–4× speed increase compared to CPU-based processing.
+3. Multiprocessing is essential; by leveraging multiple pods or asynchronous processing, the system can serve more users simultaneously, increasing concurrent user capacity (CCU). And, do not forget to do some load tests!

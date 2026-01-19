@@ -1,0 +1,4 @@
+1. **Document validity check:** Applied transfer learning using the MobileNetV2 architecture to classify and validate incoming document types.
+2. **Image quality enhancement:** Improved visual clarity by adjusting photometric attributes such as contrast, brightness, and colorfulness, combined with deblurring and deglare techniques.
+3. **Information extraction:** Leveraged transfer learning from the PaddleOCR model to accurately extract text from diverse document formats.
+4. **Post-processing:** Implemented document-specific typo correction rules and utilized Large Language Models (LLMs) to transform raw OCR output into structured and normalized data.

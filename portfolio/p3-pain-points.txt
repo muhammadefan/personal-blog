@@ -1,0 +1,3 @@
+1. Actionable insights only create value when paired with clear communication and alignment with stakeholders.
+2. A data team’s role extends beyond visualization; proactive collaboration with product managers (PMs) is essential to translate insights into impactful product and business actions.
+3. Do not forget to create a data dictionary, for any-scale products.

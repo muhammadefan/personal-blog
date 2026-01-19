@@ -1,0 +1,5 @@
+1. Comprehensive documentation—especially around data sourcing and data flow—is critical for maintainability and long-term project sustainability.
+2. Standardization, even at basic levels such as database table naming conventions, greatly improves usability and cross-team collaboration.
+3. Regular communication with stakeholders is essential to align domain expertise with analytical findings, particularly when interpreting anomalies or special cases.
+4. Clean data requires consistent standards (e.g., device naming and metadata); enforcing these standards significantly improves data reliability and model validity.
+5. The availability of clean historical data was limited to approximately two years, with gaps for certain devices and time ranges. As a result, complex deep learning models (e.g., Prophet, Long Short-Term Memory (LSTM), and Convolutional Neural Network (CNN)) were less effective. A carefully engineered regression-based model proved more robust and delivered superior performance under these constraints.

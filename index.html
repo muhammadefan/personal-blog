@@ -19,7 +19,6 @@
     <div class="first-section">
         <!-- Navigation Bar -->
         <nav class="navbar">
-            <!-- <div class="navbar-title">Hi, I'm Efan</div> -->
             <a href="#" class="navbar-title" onclick="scrollToTop(event)">
                 <div class="navbar-title-text">Hi, I'm Efan</div>
                 <div class="navbar-subtitle" id="navbarSubtitle">a Data Analyst</div>
@@ -33,9 +32,9 @@
                         Notes <span class="dropdown-arrow"></span>
                     </button>
                     <div class="dropdown-content">
-                        <button onclick="navigateToPage('kajian')">Kajian</button>
+                        <button onclick="navigateToPage('thematic')">Thematic Studies</button>
                         <button onclick="navigateToPage('thoughts')">Thoughts</button>
-                        <!-- <button onclick="navigateToPage('menu-c-3')">Option 3</button> -->
+                        <button onclick="navigateToPage('traveling')">Traveling</button>
                     </div>
                 </div>
             </div>
@@ -53,7 +52,6 @@
                 <!-- Input Form -->
                 <div class="input-form">
                     <input type="text" class="input-field" placeholder="write your question here..." id="questionInput">
-                    <!-- <button class="send-btn" onclick="sendQuestion()" id="sendBtn">Send</button> -->
                     <button class="send-btn" onclick="sendQuestion()" id="sendBtn" title="Send">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -110,18 +108,18 @@
 
     <div class="projects-section">
         <div class="projects-layout">
+            <h2 class="projects-title">Portfolio Projects</h2>
             <div class="portfolio-sidebar">
-                <!-- <h3 class="sidebar-title">Categories</h3> -->
                 <div class="category-filter-list">
                     <button class="category-filter-btn filter-all active" onclick="filterPortfolio('all')">All Projects</button>
-                    <button class="category-filter-btn filter-category-a" onclick="filterPortfolio('Descriptive')">Descriptive</button>
-                    <button class="category-filter-btn filter-category-b" onclick="filterPortfolio('Diagnostics')">Diagnostics</button>
-                    <button class="category-filter-btn filter-category-c" onclick="filterPortfolio('Predictive')">Predictive</button>
-                    <button class="category-filter-btn filter-category-d" onclick="filterPortfolio('Prescriptive')">Prescriptive</button>
+                    <button class="category-filter-btn filter-category-a" onclick="filterPortfolio('AI/ML')">AI/ML</button>
+                    <button class="category-filter-btn filter-category-b" onclick="filterPortfolio('Data Analytics')">Data Analytics</button>
+                    <!-- <button class="category-filter-btn filter-category-c" onclick="filterPortfolio('Predictive')">Predictive</button> -->
+                    <!-- <button class="category-filter-btn filter-category-d" onclick="filterPortfolio('Prescriptive')">Prescriptive</button> -->
                 </div>
             </div>
             <div class="projects-main-content">
-                <h2 class="projects-title">Portfolio Projects</h2>
+                
                 <div id="projectsContainer"></div>
             </div>
         </div>
@@ -148,7 +146,5 @@
     <script src="script.js"></script>
     <script src="config.js"></script>
     <script src="config.local.js" onerror="console.log('⚠️ Local config not found - using production mode')"></script>
-    <!-- <script>
-    </script> -->
 </body>
 </html>

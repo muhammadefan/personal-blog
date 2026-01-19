@@ -1,92 +1,128 @@
 [
     {
         "id": 1,
-        "category": "Predictive",
-        "title": "Time-Series Forecasting",
-        "techStacks": "Python, Airflow",
+        "category": "AI/ML",
+        "title": "Telco Network Traffic Forecasting",
+        "techStacks": "Python, PostgreSQL, CVXPY, TensorFlow, Keras, Airflow, Redash, GitLab",
         "icon": "fas fa-file-alt",
+        "overview": "p1-overview.txt",
+        "responsibilities": {
+            "type": "text",
+            "content": "Designed, developed, and deployed an automated time-series forecasting pipeline orchestrated with Apache Airflow and executed on the first day of every month. The pipeline generates traffic usage forecasts up to one year ahead (and occasionally 3–5 years), evaluates model performance using the most recent full-month’s data, and publishes results to a monitoring dashboard that tracks forecast accuracy and projected traffic growth."
+        },
         "goals": {
             "type": "text",
-            "content": "Generating revenue."
+            "content": "Accurately forecast network traffic usage for specific infrastructure relationships in Indonesia, such as METRO-to-METRO and METRO-to-BRAS links, to support capacity planning and investment decisions."
         },
-        "methods": "portfolio1-methods.txt",
-        "painPoints": "portfolio1-pain-points.txt",
-        "improvements": "portfolio1-improvement.txt",
-        "impact": {
+        "methods": "p1-methods.txt",
+        "impacts": {
             "type": "text",
-            "content": "Get 100% revenue hikes."
+            "content": "Achieved less than 4% Symmetric Mean Absolute Percentage Error (SMAPE) and over 90% R² consistently over a 6-month period. These results enabled stakeholders to optimize upcoming CAPEX plans by maximizing existing infrastructure utilization and prioritizing targeted network expansion."
+        },
+        "painPoints": "p1-pain-points.txt",
+        "improvements": {
+            "type": "text",
+            "content": "Current forecasting is performed at specific infrastructure relationships (e.g., METRO-to-METRO). However, CAPEX planning typically considers the entire network as an interconnected system, similar to a river stream. While graph-based approaches such as Graph Neural Networks (GNNs) were explored, insufficient clean and reliable data describing end-to-end device relationships limited their effectiveness. Future work includes improving data quality and relationship mapping to enable holistic, network-wide forecasting."
+        },
+        "timeline": {
+            "type": "text",
+            "content": "Q2/2022 - Q3/2024"
         }
     },
     {
         "id": 2,
-        "category": "Predictive",
+        "category": "AI/ML",
         "title": "Document Information Extraction for e-KYC System",
-        "techStacks": "Python, Kubernetes, Docker",
+        "techStacks": "Python, OpenCV, Scikit-Learn, TensorFlow, Keras, PaddleOCR, Ollama, FastAPI, Docker, Kubernetes, MinIO, AWS S3, Postman, GitLab, ArgoCD",
         "icon": "fas fa-file-alt",
+        "overview": "p2-overview.txt",
+        "responsibilities": {
+            "type": "text",
+            "content": "Designed and implemented an end-to-end document processing pipeline, covering document validity verification, image quality enhancement, OCR-based information extraction, and LLM-driven post-processing to produce clean, standardized JSON outputs."
+        },
         "goals": {
             "type": "text",
-            "content": "This is direct text content for methods..."
+            "content": "Prevent incorrect document processing while ensuring accurate and reliable extraction of customer information."
         },
-        "methods": "portfolio2-methods.txt",
-        "painPoints": "portfolio2-pain-points.txt",
-        "improvements": "portfolio2-improvement.txt",
-        "impact": {
+        "methods": "p2-methods.txt",
+        "impacts": {
             "type": "text",
-            "content": "Generating revenue."
+            "content": "Achieved end-to-end processing time of under 3 seconds—from document validation to information extraction—while maintaining high accuracy and consistency across document types, enabling faster customer onboarding and a smoother user experience."
+        },
+        "painPoints": "p2-pain-points.txt",
+        "improvements": {
+            "type": "text",
+            "content": "Explore more advanced image enhancement techniques to better handle heavily scratched text and severely blurred document images."
+        },
+        "timeline": {
+            "type": "text",
+            "content": "Q2/2025 - Q4/2025"
         }
     },
     {
         "id": 3,
-        "category": "Prescriptive",
-        "title": "Document Information Extraction for e-KYC System",
-        "techStacks": "Python, Kubernetes, Docker",
+        "category": "Data Analytics",
+        "title": "Add-on Sales Intelligence and Fraud Detection Platform",
+        "techStacks": "Python, MySQL, Airflow, Looker, GitLab",
         "icon": "fas fa-file-alt",
+        "overview": "p3-overview.txt",
+        "responsibilities": {
+            "type": "text",
+            "content": "Designed and implemented end-to-end Extract, Transform, Load (ETL) pipelines for all add-ons to build structured datamarts and Looker dashboards. Conducted customer cohort analysis to uncover behavioral patterns, such as the effects of pricing changes and marketing campaigns, supported fraud detection efforts, and visualized customer journeys for the SMOOA add-on using Sankey diagrams."
+        },
         "goals": {
             "type": "text",
-            "content": "This is direct text content for methods..."
+            "content": "Monitor monthly add-on sales performance and proactively detect fraudulent customer behavior to prevent similar actions in the future."
         },
-        "methods": "portfolio2-methods.txt",
-        "painPoints": "portfolio2-pain-points.txt",
-        "improvements": "portfolio2-improvement.txt",
-        "impact": {
+        "methods": {
             "type": "text",
-            "content": "Generating revenue."
+            "content": "Utilized Looker to develop high-level, interactive dashboards that enable stakeholders to explore sales performance, customer behavior, and fraud indicators efficiently."
+        },
+        "impacts": {
+            "type": "text",
+            "content": "Contributed to a reduction in fraudulent transactions and improved reconciliation of sales figures with business stakeholders, increasing trust in reported metrics and decision-making processes."
+        },
+        "painPoints": "p3-pain-points.txt",
+        "improvements": {
+            "type": "text",
+            "content": "Enhance data collection and validation processes to improve data completeness, accuracy, and analytical reliability."
+        },
+        "timeline": {
+            "type": "text",
+            "content": "Q3/2023 - Q4/2024"
         }
     },
     {
         "id": 4,
-        "category": "Descriptive",
-        "title": "Document Information Extraction for e-KYC System",
-        "techStacks": "Python, Kubernetes, Docker",
+        "category": "AI/ML",
+        "title": "Mango Maturity Level Monitoring System",
+        "techStacks": "Python, MySQL, C (ESP8266), Google Firestore, Google Cloud Storage, Google Cloud Functions, Google Cloud Scheduler, Scikit-learn, TensorFlow, Keras, SolidWorks",
         "icon": "fas fa-file-alt",
+        "overview": "p4-overview.txt",
+        "responsibilities": {
+            "type": "text",
+            "content": "Designed the IoT device enclosure using SolidWorks and produced it through 3D printing. Integrated IoT-based data collection with Google Firestore as the primary data store. Developed a predictive model to estimate mango maturity levels and deployed the system on Google Cloud Platform (GCP). Implemented a fault-tolerant mechanism that allows the device to store temperature, humidity, and geolocation data locally when internet connectivity is unavailable, and automatically transmit the data to GCP once the connection is restored. Configured scheduled predictions to run every five minutes using Google Cloud Scheduler."
+        },
         "goals": {
             "type": "text",
-            "content": "This is direct text content for methods..."
+            "content": "Provide near real-time updates (every five minutes) on mango maturity levels, environmental conditions (temperature and humidity), and geolocation (latitude and longitude) throughout the delivery process."
         },
-        "methods": "portfolio2-methods.txt",
-        "painPoints": "portfolio2-pain-points.txt",
-        "improvements": "portfolio2-improvement.txt",
-        "impact": {
+        "methods": {
             "type": "text",
-            "content": "Generating revenue."
-        }
-    },
-    {
-        "id": 5,
-        "category": "Diagnostics",
-        "title": "Document Information Extraction for e-KYC System",
-        "techStacks": "Python, Kubernetes, Docker",
-        "icon": "fas fa-file-alt",
-        "goals": {
-            "type": "text",
-            "content": "This is direct text content for methods..."
+            "content": "Applied a traditional machine learning approach to predict the current mango maturity level based on the initial maturity state, ambient temperature, humidity, and the number of days since harvest. Maturity levels were defined using clustering techniques, resulting in five distinct categories. These categories were determined collaboratively with an agriculture expert to ensure practical and domain-relevant interpretations."
         },
-        "methods": "portfolio2-methods.txt",
-        "painPoints": "portfolio2-pain-points.txt",
-        "improvements": "portfolio2-improvement.txt",
-        "impact": {
+        "impacts": {
             "type": "text",
-            "content": "Generating revenue."
+            "content": "Successfully delivered continuous and reliable maturity insights even when the delivery fleet operated in low-connectivity environments, including sea routes between Java and Kalimantan. This ensured stakeholders maintained visibility into product conditions despite challenging logistical constraints."
+        },
+        "painPoints": "p4-pain-points.txt",
+        "improvements": {
+            "type": "text",
+            "content": "For larger-scale deployments or longer delivery routes, additional devices would be required. Power capacity should also be upgraded to support extended device uptime and improve system reliability over longer operational periods."
+        },
+        "timeline": {
+            "type": "text",
+            "content": "Q2/2022 - Q4/2022"
         }
-    }
+    }    
 ]

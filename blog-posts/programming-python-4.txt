@@ -55,7 +55,7 @@ Terdapat beberapa variasi dari penggunaan while — loop, yaitu:
 - Pada **kondisi tertentu**, jika kondisi tercapai, maka proses komputasinya akan otomatis berhenti, contoh di bawah ini apabila nilai `i ≥ var` maka akan proses berhenti.
 ![Image showing data](assets/blog-posts-img/programming-python-4-1.webp)
 
-- **Kondisi `True`** berarti looping forever, oleh karenanya diperlukan suatu statemen untuk menghentikan proses komputasinya, di sini menggunakan statemen brake untuk menghentikan prosesnya.
+- **Kondisi `True`** berarti looping forever, oleh karenanya diperlukan suatu statemen untuk menghentikan proses komputasinya, yaitu `brake`, untuk menghentikan komputasinya.
 ![Image showing data](assets/blog-posts-img/programming-python-4-2.webp)
 
 <p style="text-align: center; font-size: 30px">...</p>

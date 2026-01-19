@@ -14,6 +14,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-align: justify;
 }
 
 body {
@@ -86,7 +87,7 @@ body {
     font-weight: 400;
     color: #666;
     white-space: nowrap;
-    height: 20px;
+    height: 25px;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -268,6 +269,7 @@ body {
     max-width: 550px;
     margin: -5% auto 20px;  /* top, right, bottom, left OR top-bottom, right-left */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
 }
 
 /* Main Content */
@@ -705,6 +707,7 @@ body {
     line-height: 1.4;
     margin-bottom: 12px;
     word-wrap: break-word;
+    text-align: left;
 }
 
 .blog-summary {
@@ -804,7 +807,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('assets/projects-background.jpg');
+    /* background-image: url('assets/yellow-marble-texture-background.jpg'); */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -826,7 +829,7 @@ body {
     font-weight: bold;
     color: #333;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 0px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -964,6 +967,7 @@ body {
     font-size: 1.1rem;
     color: #666;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: justify;
 }
 
 .project-modal-body {
@@ -987,6 +991,7 @@ body {
 
 .project-section-content p {
     margin-bottom: 15px;
+    text-align: justify;
 }
 
 /* Project label */
@@ -994,17 +999,17 @@ body {
     display: inline-block;
     padding: 5px 15px;
     border-radius: 18px;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: 600;
     margin-bottom: 10px;
     color: white;
 }
 
-.category-descriptive-label {
+.category-ai-ml-label {
     background-color: #ff9800; /* Orange */
 }
 
-.category-diagnostics-label {
+.category-data-analytics-label {
     background-color: #4caf50; /* Green */
 }
 
@@ -1027,15 +1032,19 @@ body {
 
 .projects-layout {
     display: flex;
-    gap: 40px;
+    gap: 15px;  /* 40 */
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    flex-direction: column;
 }
 
 .portfolio-sidebar {
     flex-shrink: 0;
-    width: 140px;
+    /* width: 140px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .sidebar-title {
@@ -1047,15 +1056,18 @@ body {
 
 .category-filter-list {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .category-filter-btn {
-    padding: 12px 20px;
+    padding: 11px 18px;
     border-radius: 18px;
     border: none;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: white;
     cursor: pointer;
@@ -1461,6 +1473,7 @@ body {
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .social-subtitle {
@@ -1468,6 +1481,7 @@ body {
     color: #666;
     margin-bottom: 30px;
     line-height: 1.5;
+    text-align: center;
 }
 
 .social-icons-container {
@@ -1635,8 +1649,9 @@ body {
     
     .section-subtitle {
         font-size: 1rem;
-        margin: -30px auto 15px;
+        margin: -20px auto 15px;
         max-width: 90%;
+        text-align: center;
     }
     
     /* Chat Container */
@@ -1747,6 +1762,7 @@ body {
     /* Social Media */
     .social-title {
         font-size: 1.7rem;
+        text-align: center;
     }
     
     .social-icons-container {
@@ -1804,7 +1820,8 @@ body {
     
     .section-subtitle {
         font-size: 0.9rem;
-        margin: -25px auto 10px;
+        margin: -15px auto 10px;
+        text-align: center;
     }
     
     .title-container {
@@ -1948,11 +1965,13 @@ body {
     
     .social-title {
         font-size: 1.5rem;
+        text-align: center;
     }
     
     .social-subtitle {
         font-size: 0.9rem;
         margin-bottom: 20px;
+        text-align: center;
     }
     
     .social-icons-container {
