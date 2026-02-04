@@ -19,7 +19,8 @@
     <div class="first-section">
         <!-- Navigation Bar -->
         <nav class="navbar">
-            <a href="#" class="navbar-title" onclick="scrollToTop(event)">
+            <!-- <a href="#" class="navbar-title" onclick="scrollToTop(event)"> -->
+            <a href="index.html" class="navbar-title" onclick="scrollToTop(event)">
                 <div class="navbar-title-text">Hi, I'm Efan</div>
                 <div class="navbar-subtitle" id="navbarSubtitle">a Data Analyst</div>
             </a>
@@ -71,19 +72,18 @@
     <!-- Second Section: Blog Posts -->
     <!-- MANUAL EDIT IF MORE ADDITIONS -->
     <div class="blog-section">
+        <!-- Blog Filter Buttons -->
+        <div class="blog-filter-container">
+            <button class="blog-filter-btn active" onclick="filterBlogPosts('all')">All</button>
+            <button class="blog-filter-btn" onclick="filterBlogPosts('programming')">Programming</button>
+            <button class="blog-filter-btn" onclick="filterBlogPosts('analytics')">Analytics</button>
+            <button class="blog-filter-btn" onclick="filterBlogPosts('computer vision')">Computer Vision</button>
+        </div>
+
         <!-- Main Blog Grid View -->
         <div class="blog-container" id="blogMainView">
-            <!-- Category A -->
-            <div class="category-section">
-                <h2 class="category-title" onclick="showCategoryList('programming')">Programming</h2>
-                <div class="blog-grid" id="categoryA"></div>
-            </div>
-
-            <!-- Category B -->
-            <div class="category-section">
-                <h2 class="category-title" onclick="showCategoryList('B')">Category-B</h2>
-                <div class="blog-grid" id="categoryB"></div>
-            </div>
+            <!-- All blog posts will be rendered here dynamically -->
+            <div class="blog-grid" id="allBlogPosts"></div>
         </div>
 
         <!-- Category List View -->
@@ -106,9 +106,10 @@
         </div>
     </div>
 
+    <!-- Third Section: Portfolio of Projects -->
     <div class="projects-section">
         <div class="projects-layout">
-            <h2 class="projects-title">Portfolio Projects</h2>
+            <h2 class="projects-title">Portfolio of Projects</h2>
             <div class="portfolio-sidebar">
                 <div class="category-filter-list">
                     <button class="category-filter-btn filter-all active" onclick="filterPortfolio('all')">All Projects</button>
@@ -119,7 +120,6 @@
                 </div>
             </div>
             <div class="projects-main-content">
-                
                 <div id="projectsContainer"></div>
             </div>
         </div>
@@ -145,6 +145,6 @@
 
     <script src="script.js"></script>
     <script src="config.js"></script>
-    <script src="config.local.js" onerror="console.log('⚠️ Local config not found - using production mode')"></script>
+    <script src="config.local.js" onerror="console.log('Local config not found - using production mode')"></script>
 </body>
 </html>

@@ -135,28 +135,169 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 // ==== SECTION 2: BLOG POST ====
-// MANUAL EDIT IF MORE ADDITIONS
-function loadBlogPosts() {
-    // Get 4 most recent posts for each category
-    const categoryAPosts = blogPosts
-        .filter(post => post.category === 'programming')
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 4);
-    
-    const categoryBPosts = blogPosts
-        .filter(post => post.category === 'B')
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 4);
+// Track current filter and display state
+let currentBlogFilter = 'all';
+let showAllPosts = false;
 
-    renderBlogCards('categoryA', categoryAPosts);
-    renderBlogCards('categoryB', categoryBPosts);
+function loadBlogPosts() {
+    // Load all posts initially with default filter
+    const allButton = document.querySelector('.blog-filter-btn[onclick*="all"]');
+    if (allButton) {
+        allButton.classList.add('active');
+    }
+    filterBlogPosts('all', true);
+}
+
+function filterBlogPosts(category, isInitialLoad = false) {
+    currentBlogFilter = category;
+    showAllPosts = false; // Reset to show limited posts when filtering
+    
+    // Update active button (skip if initial load, already handled)
+    if (!isInitialLoad) {
+        document.querySelectorAll('.blog-filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+    
+    // Filter posts based on category
+    let filteredPosts;
+    if (category === 'all') {
+        filteredPosts = blogPosts;
+    } else {
+        filteredPosts = blogPosts.filter(post => post.category === category);
+    }
+    
+    // Sort by date (most recent first)
+    filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // Render posts with limit
+    renderBlogCards('allBlogPosts', filteredPosts);
+}
+
+function toggleShowAllPosts() {
+    showAllPosts = !showAllPosts;
+    
+    // Re-filter with current category
+    let filteredPosts;
+    if (currentBlogFilter === 'all') {
+        filteredPosts = blogPosts;
+    } else {
+        filteredPosts = blogPosts.filter(post => post.category === currentBlogFilter);
+    }
+    
+    // Sort by date (most recent first)
+    filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // Get the container
+    const container = document.getElementById('allBlogPosts');
+    
+    if (showAllPosts) {
+        // EXPANDING: Show all posts
+        const currentCards = container.querySelectorAll('.blog-card');
+        const hiddenPosts = filteredPosts.slice(8);
+        
+        // Add hidden posts with animation
+        hiddenPosts.forEach((post, index) => {
+            const card = createBlogCard(post);
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            container.insertBefore(card, container.querySelector('.show-all-container'));
+            
+            // Trigger animation with delay
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 50);
+        });
+        
+        // Update button
+        const showAllBtn = container.querySelector('.show-all-btn');
+        if (showAllBtn) {
+            showAllBtn.innerHTML = 'Hide Posts';
+        }
+        
+    } else {
+        // COLLAPSING: Hide extra posts
+        const allCards = container.querySelectorAll('.blog-card');
+        const cardsToRemove = Array.from(allCards).slice(8);
+        
+        // Animate out the cards
+        cardsToRemove.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(-20px)';
+                
+                // Remove after animation
+                setTimeout(() => {
+                    card.remove();
+                }, 300);
+            }, index * 30);
+        });
+        
+        // Update button after animation completes
+        setTimeout(() => {
+            const showAllBtn = container.querySelector('.show-all-btn');
+            if (showAllBtn) {
+                showAllBtn.innerHTML = `Show All (${filteredPosts.length - 8} more)`;
+            }
+        }, cardsToRemove.length * 30 + 300);
+    }
+}
+
+// Helper function to create a blog card element
+function createBlogCard(post) {
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.onclick = () => openBlogPost(post);
+
+    // Format date
+    const dateObj = new Date(post.date);
+    const formattedDate = dateObj.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: '2-digit', 
+        year: 'numeric' 
+    });
+
+    // Check if post has a custom image, otherwise show placeholder
+    const imageHTML = post.image 
+        ? `<img src="${post.image}" alt="${post.title}">` 
+        : `<div class="blog-image-placeholder"></div>`;
+
+    card.innerHTML = `
+        <div class="blog-image">
+            ${imageHTML}
+        </div>
+        <div class="blog-content">
+            <div class="blog-meta">
+                <span>${formattedDate}</span>
+                <span class="blog-meta-separator">•</span>
+                <span>${post.readingTime} min read</span>
+            </div>
+            <h3 class="blog-title">${post.title}</h3>
+            <p class="blog-summary">${post.summary}</p>
+            <div class="blog-card-footer">
+                <button class="blog-read-btn">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    `;
+
+    return card;
 }
 
 function renderBlogCards(containerId, posts) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
 
-    posts.forEach(post => {
+    // Determine how many posts to show
+    const postsToShow = showAllPosts ? posts : posts.slice(0, 8);
+    const hasMorePosts = posts.length > 8 && !showAllPosts;
+
+    postsToShow.forEach(post => {
         const card = document.createElement('div');
         card.className = 'blog-card';
         card.onclick = () => openBlogPost(post);
@@ -173,21 +314,6 @@ function renderBlogCards(containerId, posts) {
         const imageHTML = post.image 
             ? `<img src="${post.image}" alt="${post.title}">` 
             : `<div class="blog-image-placeholder"></div>`;
-
-        // card.innerHTML = `
-        //     <div class="blog-image">
-        //         ${imageHTML}
-        //     </div>
-        //     <div class="blog-content">
-        //         <div class="blog-meta">
-        //             <span>${formattedDate}</span>
-        //             <span class="blog-meta-separator">•</span>
-        //             <span>${post.readingTime} min read</span>
-        //         </div>
-        //         <h3 class="blog-title">${post.title}</h3>
-        //         <p class="blog-summary">${post.summary}</p>
-        //     </div>
-        // `;
 
         card.innerHTML = `
             <div class="blog-image">
@@ -211,6 +337,23 @@ function renderBlogCards(containerId, posts) {
 
         container.appendChild(card);
     });
+
+// Add "Show All" or "Hide Posts" button if there are more than 8 posts initially
+    if (posts.length > 8) {
+        const showAllContainer = document.createElement('div');
+        showAllContainer.className = 'show-all-container';
+        
+        const buttonText = showAllPosts 
+            ? 'Hide Posts' 
+            : `Show All (${posts.length - 8} more)`;
+        
+        showAllContainer.innerHTML = `
+            <button class="show-all-btn" onclick="toggleShowAllPosts()">
+                ${buttonText}
+            </button>
+        `;
+        container.appendChild(showAllContainer);
+    }
 }
 
 function convertString(str) {
@@ -616,14 +759,35 @@ function renderSocialMediaIcons() {
 
 // ==== OTHERS ====
 // Navigation function
+// function navigateToPage(page) {
+//     if (page === 'article') {
+//         scrollToBlog();
+//     } else if (page == 'portfolio'){
+//         scrollToPortfolio();
+//     } else {
+//         console.log('Navigating to:', page);
+//         alert('Navigation to ' + page + ' (functionality to be implemented)');
+//     }
+// }
+
 function navigateToPage(page) {
     if (page === 'article') {
         scrollToBlog();
     } else if (page == 'portfolio'){
         scrollToPortfolio();
     } else {
-        console.log('Navigating to:', page);
-        alert('Navigation to ' + page + ' (functionality to be implemented)');
+        const pageMap = {
+            'article': 'index.html#blog-section',
+            'portfolio': 'index.html#projects-section',
+            'thematic': 'sub_thematic.html',
+            'thoughts': 'sub_thought.html',
+            'traveling': 'sub_traveling.html'
+        };
+
+        const destination = pageMap[page];
+        if (destination) {
+            window.location.href = destination;
+        }
     }
 }
 

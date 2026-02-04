@@ -1,0 +1,13 @@
+git clone url
+
+git status
+
+git add .
+git commit -m "description..."
+git push origin master
+
+git checkout release
+git merge master
+git push origin release
+
+git checkout -b release

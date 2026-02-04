@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thematic Studies - Efan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display,wght@1,700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <div class="first-section">
+        <nav class="navbar">
+            <a href="index.html" class="navbar-title">
+                <div class="navbar-title-text">Hi, I'm Efan</div>
+            </a>
+            <div class="navbar-menu">
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        Notes <span class="dropdown-arrow"></span>
+                    </button>
+                    <div class="dropdown-content">
+                        <button onclick="navigateToPage('thematic')">Thematic Studies</button>
+                        <button onclick="navigateToPage('thoughts')">Thoughts</button>
+                        <button onclick="navigateToPage('traveling')">Traveling</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="notes-container">
+                <h1 class="notes-title">Thematic Studies</h1>
+                <p class="notes-content">Hello World - Thematic Studies</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

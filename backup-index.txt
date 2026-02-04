@@ -1,0 +1,42 @@
+    <!-- Second Section: Blog Posts -->
+    <!-- MANUAL EDIT IF MORE ADDITIONS -->
+    <div class="blog-section">
+        <!-- Main Blog Grid View -->
+        <div class="blog-container" id="blogMainView">
+            <!-- Category A -->
+            <div class="category-section">
+                <h2 class="category-title" onclick="showCategoryList('programming')">Programming</h2>
+                <div class="blog-grid" id="categoryA"></div>
+            </div>
+
+            <!-- Category B -->
+            <div class="category-section">
+                <h2 class="category-title" onclick="showCategoryList('B')">Category-B</h2>
+                <div class="blog-grid" id="categoryB"></div>
+            </div>
+        </div>
+
+        <!-- Category List View -->
+        <div class="category-list-view" id="categoryListView">
+            <div class="category-header">
+                <button class="back-button" onclick="hideCategoryList()">Back to all categories</button>
+                <h1 class="category-list-title" id="categoryListTitle"></h1>
+                <p class="category-list-subtitle" id="categoryListSubtitle"></p>
+            </div>
+            <div id="postListContainer"></div>
+        </div>
+    </div>
+
+
+
+,
+    {
+        "id": 6,
+        "category": "data visualization",
+        "title": "Python: Function & Anonymous Function",
+        "summary": "Pengenalan function: def dan lambda untuk membuat kode modular, efisien, dan mudah dipelihara.",
+        "contentFile": "programming-python-5.txt",
+        "date": "2021-02-18",
+        "readingTime": 3,
+        "image": "assets/blog-posts-img/programming-python-5.webp"
+    }

@@ -1,0 +1,14 @@
+download Python here: https://www.python.org/downloads/
+
+create virtual environment: `python -m venv venv`
+activate virtual environment: 
+- `source venv/Scripts/activate` (executed in bash terminal for Windows)
+- `source venv/bin/activate` (executed in Mac terminal)
+Once activated, your shell prompt will change to include the name of the environment in parentheses (e.g., (venv) ...$), indicating the virtual environment is active. 
+
+install packages: While the environment is active, use pip install <package_name> to install libraries directly into this isolated environment.
+
+deactivate virtual environment: To exit the virtual environment and return to your system's global Python, simply run the command: `deactivate`
+
+
+create env with specified Python version (must be installed first) -> `py -3.10 -m venv venv_name`

@@ -48,5 +48,45 @@
         "date": "2021-02-18",
         "readingTime": 3,
         "image": "assets/blog-posts-img/programming-python-5.webp"
+    },
+    {
+        "id": 6,
+        "category": "computer vision",
+        "title": "TFLOPS vs. TOPS",
+        "summary": "Perbedaan...",
+        "contentFile": "cv-1.txt",
+        "date": "2026-01-20",
+        "readingTime": 3,
+        "image": "assets/blog-posts-img/programming-python-5.webp"
+    },
+    {
+        "id": 7,
+        "category": "computer vision",
+        "title": "TFLOPS vs. TOPS",
+        "summary": "Perbedaan...",
+        "contentFile": "cv-1.txt",
+        "date": "2026-01-20",
+        "readingTime": 3,
+        "image": "assets/blog-posts-img/programming-python-5.webp"
+    },
+    {
+        "id": 8,
+        "category": "computer vision",
+        "title": "TFLOPS vs. TOPS",
+        "summary": "Perbedaan...",
+        "contentFile": "cv-1.txt",
+        "date": "2026-01-20",
+        "readingTime": 3,
+        "image": "assets/blog-posts-img/programming-python-5.webp"
+    },
+    {
+        "id": 9,
+        "category": "computer vision",
+        "title": "TFLOPS vs. TOPS",
+        "summary": "Perbedaan...",
+        "contentFile": "cv-1.txt",
+        "date": "2026-01-20",
+        "readingTime": 3,
+        "image": "assets/blog-posts-img/programming-python-5.webp"
     }
 ]
